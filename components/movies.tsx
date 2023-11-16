@@ -12,7 +12,7 @@ function Movies() {
 
       <div className='gridcontainer w-full mt-5'>
         {carouselMovies.map((movie, i) =>
-        <div className="relative">
+        <div className="relative" key={i}>
           <motion.div 
           whileHover={{ scale: 1.2, zIndex: 50 }}
           className='group flex items-end relative h-full min-h-[320px] w-full overflow-hidden  rounded-md border-[2px]  border-gray-800'>
