@@ -17,11 +17,30 @@ html, body {
     
   }
 
+  .textShadow {
+    color: white;
+    text-shadow: 2px 4px 4px rgba(18,18,18,1);
+  }
+
+  .postershadow {
+    box-shadow: rgba(18, 18, 18, 18.86) 0px 22px 40px 6px;
+  }
+
   .gridcontainer {
     display: grid;
     grid-auto-flow: dense;
     gap: 5px;
     grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
   }
+
+  .carouselgradient {
+    @apply absolute top-0 left-0  w-full h-full bg-gradient-to-t from-dark/100 to-dark/5
+  }
+
+  /* .carouselImgContainer::before {
+    content: '';
+    @apply absolute top-0 left-0  w-full h-full bg-gradient-to-t from-dark/100 to-dark/5
+    
+  } */
 
  

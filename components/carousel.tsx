@@ -59,7 +59,7 @@ function Carousel() {
 
 
               <div className={`absolute h-full w-full z-10 `} key={i}>
-                <div className='relative z-20 h-full w-full '>
+                <div className='relative h-full w-full '>
                   <Image
                     src={movie.image}
                     alt={movie.image}
@@ -68,7 +68,8 @@ function Carousel() {
                     className='object-cover relative -z-10'
                   />
 
-                  <div className='absolute top-0 bottom-0 left-0 right-0 shadow-[inset_0px__-250px_200px_rgba(18,18,18,1)] box-border z-30' />
+                <div className='carouselgradient z-20' />
+                  {/* <div className='absolute top-0 bottom-0 left-0 right-0 shadow-[inset_0px__-250px_200px_rgba(18,18,18,1)] box-border z-30' /> */}
                 </div>
               </div>
 
