@@ -34,7 +34,7 @@ html, body {
   }
 
   .carouselgradient {
-    @apply absolute top-0 left-0  w-full h-full bg-gradient-to-t from-dark/100 to-dark/5
+    @apply absolute top-0 left-0  w-full h-full bg-gradient-to-t from-dark/100 to-dark/10
   }
 
   /* .carouselImgContainer::before {

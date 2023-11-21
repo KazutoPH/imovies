@@ -6,7 +6,7 @@ import { FaChevronLeft } from "react-icons/fa6";
 import { FaChevronRight } from 'react-icons/fa6';
 import { motion } from 'framer-motion';
 
-function Carousel() {
+function Carousel({ trending }: any) {
   const [currentSlide, setCurrentSlide] = useState(0)
   const [buttonPress, setButtonPress] = useState(false)
 
@@ -52,39 +52,56 @@ function Carousel() {
         <div
           className='flex justify-start items-start overflow-hidden relative'
         >
-          {carouselMovies.map((movie, i) =>
+          {trending && trending.map((movie:any, i:any) =>
             <div
               style={{ transform: `translateX(-${currentSlide * 100}%)` }}
-              className='relative flex h-[600px] min-w-full items-end transition-transform ease-out duration-1000' key={i}>
+              className='relative flex h-[600px] min-w-full items-center transition-transform ease-out duration-1000' key={i}>
 
 
               <div className={`absolute h-full w-full z-10 `} key={i}>
                 <div className='relative h-full w-full '>
                   <Image
-                    src={movie.image}
-                    alt={movie.image}
+                    src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
+                    alt={movie.backdrop_path}
                     fill
                     unoptimized
+                    priority
                     className='object-cover relative -z-10'
                   />
 
-                <div className='carouselgradient z-20' />
+                  <div className='carouselgradient z-20' />
                   {/* <div className='absolute top-0 bottom-0 left-0 right-0 shadow-[inset_0px__-250px_200px_rgba(18,18,18,1)] box-border z-30' /> */}
                 </div>
               </div>
 
-              <div className='flex flex-col z-20 mb-[100px] ml-[100px] gap-2 max-w-[50%]'>
-                <p className='text-5xl font-extrabold text-white'>{movie.name}</p>
-                <div>
-                  <p className='text-3xl font-medium text-white'>2022-2-18</p>
+              <div className='flex items-center z-20 mx-28 gap-16 justify-center'>
+                <div className='flex flex-col z-20 gap-2 w-[50%]'>
+                  <p className='text-5xl font-extrabold text-white'>{movie.original_title}</p>
+                  <div>
+                    <p className='text-3xl font-medium text-white'>{movie.release_date}</p>
+                  </div>
+                  <p className='text-lg text-white leading-5'>{movie.overview}</p>
                 </div>
-                <p className='text-lg text-white leading-5'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin at lacus odio. Sed nec orci ut est feugiat ultricies. Sed scelerisque erat quis elit venenatis, vitae auctor risus convallis. Vestibulum lobortis, augue sed gravida facilisis, urna arcu interdum odio, eu vestibulum turpis libero ac mi. Mauris euismod felis urna, non convallis elit congue at.</p>
+
+                  <motion.div
+                  initial={{ opacity: 0, scale: 0 }}
+                  transition={{ duration: 0.2, type: 'spring', stiffness: 100 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                    className='flex relative min-h-[420px] w-[330px] overflow-hidden  rounded-md border-[2px]  border-gray-800 '>
+                      <Image
+                    src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
+                    alt={movie.poster_path}
+                        fill
+                        unoptimized
+                        className='object-cover'
+                      />
+                  </motion.div>
               </div>
             </div>
           )}
         </div>
         <div className='absolute bottom-10 flex gap-5 left-1/2 -translate-x-1/2 z-50'>
-          {carouselMovies.map((movie, i) =>
+          {trending && trending.map((movie:any, i:any) =>
             <div onClick={() => setCurrentSlide(i)} className={`h-2 w-2 rounded-full ${currentSlide === i ? ' bg-white' : ' bg-gray-500'} hover:cursor-pointer`} key={i} />
           )}
 
