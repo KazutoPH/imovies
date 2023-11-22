@@ -37,6 +37,22 @@ html, body {
     @apply absolute top-0 left-0  w-full h-full bg-gradient-to-t from-dark/100 to-dark/10
   }
 
+  .btn { 
+    @apply bg-yellow-400 py-1 px-5 rounded-full text-dark font-semibold text-lg
+  }
+
+  .btn2 { 
+    @apply py-1 px-2 rounded-full text-white font-semibold text-lg box-border border-white border-[3px]
+  }
+
+  .btn2:hover {
+
+  }
+
+  .darkbg {
+    @apply bg-dark/90 fixed h-full w-full z-50 top-0
+  }
+
   /* .carouselImgContainer::before {
     content: '';
     @apply absolute top-0 left-0  w-full h-full bg-gradient-to-t from-dark/100 to-dark/5

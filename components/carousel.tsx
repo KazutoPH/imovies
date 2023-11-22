@@ -13,10 +13,10 @@ function Carousel({ trending }: any) {
   useEffect(() => {
 
     if (!buttonPress)
-      var timer = setTimeout(() => setCurrentSlide((currentSlide) => (currentSlide === carouselMovies.length - 1 ? 0 : currentSlide + 1)), 5000)
+      var timer = setTimeout(() => setCurrentSlide((currentSlide) => (currentSlide === trending.length - 1 ? 0 : currentSlide + 1)), 5000)
 
     if (buttonPress)
-      var timer = setTimeout(() => setCurrentSlide((currentSlide) => (currentSlide === carouselMovies.length - 1 ? 0 : currentSlide + 1)), 15000)
+      var timer = setTimeout(() => setCurrentSlide((currentSlide) => (currentSlide === trending.length - 1 ? 0 : currentSlide + 1)), 15000)
 
     return () => {
       clearTimeout(timer);
@@ -33,7 +33,7 @@ function Carousel({ trending }: any) {
           whileHover={{ scale: 1.2 }}
           className='flex justify-center items-center w-14 absolute left-0 top-0 bottom-0 z-20 bg-dark/40 shadow-lg shadow-dark'
           onClick={() => {
-            setCurrentSlide((currentSlide) => (currentSlide === 0 ? carouselMovies.length - 1 : currentSlide - 1))
+            setCurrentSlide((currentSlide) => (currentSlide === 0 ? trending.length - 1 : currentSlide - 1))
             setButtonPress(true)
           }}>
           <FaChevronLeft color='white' size={40} />
@@ -44,7 +44,7 @@ function Carousel({ trending }: any) {
           whileHover={{ scale: 1.2 }}
           className='flex justify-center items-center w-14 absolute right-0 top-0 bottom-0 z-20 bg-dark/40 shadow-lg shadow-dark'
           onClick={() => {
-            setCurrentSlide((currentSlide) => (currentSlide === carouselMovies.length - 1 ? 0 : currentSlide + 1))
+            setCurrentSlide((currentSlide) => (currentSlide === trending.length - 1 ? 0 : currentSlide + 1))
             setButtonPress(true)
           }}>
           <FaChevronRight color='white' size={40} />
@@ -81,6 +81,16 @@ function Carousel({ trending }: any) {
                     <p className='text-3xl font-medium text-white'>{movie.release_date}</p>
                   </div>
                   <p className='text-lg text-white leading-5'>{movie.overview}</p>
+
+                  <div className='flex gap-5 mt-2'>
+                    <button className='btn'>
+                      Watch Now
+                    </button>
+
+                    <button className='btn2'>
+                      Watch Trailer
+                    </button>
+                  </div>  
                 </div>
 
                   <motion.div
