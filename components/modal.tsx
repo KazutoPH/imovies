@@ -45,6 +45,7 @@ function Modal() {
     <div className={`darkbg ${show ? 'flex':'hidden'}`} onClick={()=> {
       router.push(`${pathname}`)
       setShow(false)
+      setTrailer(undefined)
       }}>
       <div className=' h-auto w-4/5'>
     
