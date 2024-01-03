@@ -7,7 +7,7 @@ import { FaStar } from 'react-icons/fa6';
 import { useEffect } from "react";
 
 function Movies({ movies }: any) {
-  console.log(movies)
+  // console.log(movies)
   return (
     <div className='content-container py-10'>
       <h1 className='text-white text-3xl font-extrabold self-start'>Popular Movies</h1>

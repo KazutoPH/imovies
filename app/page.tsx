@@ -7,9 +7,9 @@ import Modal from '@/components/modal'
 
 export default async function Home() {
 
-   const movies = await popularMovies()
+  const movies = await popularMovies()
   const trending = await trendingMovies()
-   console.log(trending)
+  //  console.log(trending)
 
   return (
     <main className="flex flex-col min-h-screen items-center w-full">

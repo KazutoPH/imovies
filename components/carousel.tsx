@@ -5,10 +5,13 @@ import React, { useEffect, useState } from 'react'
 import { FaChevronLeft } from "react-icons/fa6";
 import { FaChevronRight } from 'react-icons/fa6';
 import { motion } from 'framer-motion';
+import { useRouter, usePathname } from "next/navigation";
 
 function Carousel({ trending }: any) {
   const [currentSlide, setCurrentSlide] = useState(0)
   const [buttonPress, setButtonPress] = useState(false)
+  const router = useRouter()
+  const pathname = usePathname()
 
   useEffect(() => {
 
@@ -87,7 +90,8 @@ function Carousel({ trending }: any) {
                       Watch Now
                     </button>
 
-                    <button className='btn2'>
+                    <button className='btn2'
+                    onClick={()=> router.push(`${pathname}?trailer=${movie.id}`)}>
                       Watch Trailer
                     </button>
                   </div>  
