@@ -49,7 +49,7 @@ function Modal() {
       }}>
       <div className=' h-auto w-4/5'>
     
-      <iframe className='w-full aspect-video' src={`https://www.youtube.com/embed/${trailer}`} title="Movie Trailer" allow="autoplay; picture-in-picture;" allowFullScreen></iframe>
+      <iframe className='w-full aspect-video' src={`https://www.youtube.com/embed/${trailer}?&autoplay=1`} title="Movie Trailer" allow="autoplay; picture-in-picture;" allowFullScreen></iframe>
  
 
       </div>

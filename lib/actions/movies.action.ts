@@ -32,3 +32,21 @@ export async function getTrailer(id:string){
 
   return trailer
 }
+
+export async function getMovieById(id:string){
+  const movie = await
+  fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.THEMOVIESDB_API_KEY}&language=en-US`)
+  .then(res =>  res.json())
+  .then(json =>{ return json})
+
+  return movie
+}
+
+export async function getMovieCast(id:string){
+  const movie = await
+  fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.THEMOVIESDB_API_KEY}&language=en-US&append_to_response=credits`)
+  .then(res =>  res.json())
+  .then(json =>{ return json})
+
+  return movie
+}

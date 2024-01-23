@@ -5,9 +5,10 @@ import Image from "next/image"
 import { motion } from 'framer-motion';
 import { FaStar } from 'react-icons/fa6';
 import { useEffect } from "react";
+import Link from "next/link";
 
 function Movies({ movies }: any) {
-  // console.log(movies)
+  console.log(movies)
   return (
     <div className='content-container py-10'>
       <h1 className='text-white text-3xl font-extrabold self-start'>Popular Movies</h1>
@@ -15,6 +16,7 @@ function Movies({ movies }: any) {
       <div className='gridcontainer w-full mt-5'>
         {movies && movies.results.map((movie: any, i: any) =>
           <div className="relative" key={i}>
+            <Link href={`/movie/${movie.id}`}>
             <motion.div
               whileHover={{ scale: 1.2, zIndex: 50 }}
               className='group flex items-end relative h-full min-h-[320px] w-full overflow-hidden  rounded-md border-[2px]  border-gray-800'>
@@ -44,8 +46,8 @@ function Movies({ movies }: any) {
                 </div>
 
               </div>
-
             </motion.div>
+            </Link>
           </div>
         )}
       </div>
