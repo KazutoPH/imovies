@@ -2,12 +2,14 @@ import React from 'react'
 import { carouselMovies } from '@/constants/constant'
 import Image from 'next/image'
 import { FaStar } from 'react-icons/fa6'
-import { getMovieById } from '@/lib/actions/movies.action'
+import { getCredits, getMovieById } from '@/lib/actions/movies.action'
 
 async function page({ params }: { params: { id: string } }) {
   
   const movie = await getMovieById(params.id)
+  const credits = await getCredits(params.id)
 
+  // console.log(credits)
   console.log(movie)
   return (
     <div className='flex w-full flex-col items-center pb-10'>
