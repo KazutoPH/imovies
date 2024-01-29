@@ -33,9 +33,9 @@ function Movies({ movies, title, type }: any) {
               </div>
 
               <div className="z-40 p-2 hidden group-hover:flex flex-col">
-                <p className=' text-white text-lg font-bold'>{movie.original_title}</p>
+                <p className=' text-white text-lg font-bold'>{type=== 'tv' ? movie.original_name : movie.original_title}</p>
                 <div className="flex justify-between items-center">
-                  <p className=' text-white text-sm font-light'>{movie.release_date}</p>
+                  <p className=' text-white text-sm font-light'>{type=== 'tv' ? movie.first_air_date : movie.release_date}</p>
 
                   <div className="flex items-center">
                     <p className=' text-white text-sm font-light mr-2'>{Math.round((movie.vote_average) * 10.0) / 10.0}</p>

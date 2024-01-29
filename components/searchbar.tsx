@@ -6,7 +6,7 @@ import { useSearchParams, usePathname, useRouter } from 'next/navigation';
 function SearchBar() {
   const searchParams = useSearchParams();
   const pathname = usePathname();
-const { replace } = useRouter();
+  const { replace } = useRouter();
 
 
   function handleSearch(search: string) {
@@ -25,9 +25,9 @@ const { replace } = useRouter();
 
   return (
     <input className=' outline-none p-1  max-w-[250px] w-full text-base'
-    onChange={(e) => {
-      handleSearch(e.target.value);
-    }}
+      onChange={(e) => {
+        handleSearch(e.target.value);
+      }}
     />
   )
 }
