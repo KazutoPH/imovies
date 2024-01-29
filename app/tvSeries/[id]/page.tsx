@@ -1,9 +1,10 @@
 import React from 'react'
-import { getMovieById } from '@/lib/actions/movies.action'
+import { getTvSeriesById } from '@/lib/actions/movies.action'
 import MovieDetails from '@/components/moviedetails'
+import TVSeriesDetails from '@/components/tvseriesdetails'
 
 async function page({ params }: { params: { id: string } }) {
-  const movie = await getMovieById(params.id)
+  const tv = await getTvSeriesById(params.id)
   // const credits = await getCredits(params.id)
   // let officialTrailer
   // if(movie)
@@ -12,7 +13,7 @@ async function page({ params }: { params: { id: string } }) {
   // console.log(officialTrailer)
   return (
     <>
-       <MovieDetails movie={movie}/>
+       <TVSeriesDetails movie={tv}/>
     </>
   )
 }

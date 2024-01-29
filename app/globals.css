@@ -30,7 +30,7 @@ html, body {
     display: grid;
     grid-auto-flow: dense;
     gap: 5px;
-    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
   }
 
   .carouselgradient {
@@ -38,7 +38,7 @@ html, body {
   }
 
   .btn { 
-    @apply bg-yellow-400 py-1 px-5 rounded-full text-dark font-semibold text-lg
+    @apply bg-yellow-400 py-2 px-5 rounded-full text-dark font-semibold text-lg
   }
 
   .btn2 { 

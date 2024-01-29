@@ -6,10 +6,12 @@ import { FaChevronLeft } from "react-icons/fa6";
 import { FaChevronRight } from 'react-icons/fa6';
 import { motion } from 'framer-motion';
 import { useRouter, usePathname } from "next/navigation";
+import Link from 'next/link';
 
 function Carousel({ trending }: any) {
   const [currentSlide, setCurrentSlide] = useState(0)
   const [buttonPress, setButtonPress] = useState(false)
+  const [maxHeight, setMaxHeight] = useState(600)
   const router = useRouter()
   const pathname = usePathname()
 
@@ -34,7 +36,7 @@ function Carousel({ trending }: any) {
         <motion.button
           whileTap={{ scale: 1.1 }}
           whileHover={{ scale: 1.2 }}
-          className='flex justify-center items-center w-14 absolute left-0 top-0 bottom-0 z-20 bg-dark/40 shadow-lg shadow-dark'
+          className='hidden sm:flex justify-center items-center w-14 absolute left-0 top-0 bottom-0 z-20 bg-dark/40 shadow-lg shadow-dark'
           onClick={() => {
             setCurrentSlide((currentSlide) => (currentSlide === 0 ? trending.length - 1 : currentSlide - 1))
             setButtonPress(true)
@@ -45,7 +47,7 @@ function Carousel({ trending }: any) {
         <motion.button
           whileTap={{ scale: 1.1 }}
           whileHover={{ scale: 1.2 }}
-          className='flex justify-center items-center w-14 absolute right-0 top-0 bottom-0 z-20 bg-dark/40 shadow-lg shadow-dark'
+          className='hidden sm:flex justify-center items-center w-14 absolute right-0 top-0 bottom-0 z-20 bg-dark/40 shadow-lg shadow-dark'
           onClick={() => {
             setCurrentSlide((currentSlide) => (currentSlide === trending.length - 1 ? 0 : currentSlide + 1))
             setButtonPress(true)
@@ -77,20 +79,25 @@ function Carousel({ trending }: any) {
                 </div>
               </div>
 
-              <div className='flex items-center z-20 mx-28 gap-16 justify-center'>
-                <div className='flex flex-col z-20 gap-2 w-[50%]'>
+              <div className='flex items-center z-20 md:mx-28 gap-16 justify-center'>
+                <div className='flex flex-col z-20 gap-2 w-[90%] md:w-[50%]'>
                   <p className='text-5xl font-extrabold text-white'>{movie.original_title}</p>
                   <div>
                     <p className='text-3xl font-medium text-white'>{movie.release_date}</p>
                   </div>
-                  <p className='text-lg text-white leading-5'>{movie.overview}</p>
+                  <div className=''>
+                  <p className='text-lg text-white leading-5 line-clamp-[10] sm:line-clamp-[14] '>{movie.overview}</p>
+                 </div>   
+                  
 
-                  <div className='flex gap-5 mt-2'>
-                    <button className='btn'>
+                  <div className='flex gap-5 mt-2 items-center flex-wrap justify-center min-w-[414px]:justify-start'>
+                  <Link href={`/movie/${movie.id}`}>
+                    <button className='btn whitespace-nowrap'>
                       Watch Now
                     </button>
+                  </Link>
 
-                    <button className='btn2'
+                    <button className='btn2 whitespace-nowrap'
                     onClick={()=> router.push(`${pathname}?trailer=${movie.id}`)}>
                       Watch Trailer
                     </button>
@@ -101,7 +108,7 @@ function Carousel({ trending }: any) {
                   initial={{ opacity: 0, scale: 0 }}
                   transition={{ duration: 0.2, type: 'spring', stiffness: 100 }}
                   whileInView={{ opacity: 1, scale: 1 }}
-                    className='flex relative min-h-[420px] w-[330px] overflow-hidden  rounded-md border-[2px]  border-gray-800 '>
+                    className='md:flex relative min-h-[420px] w-[330px] overflow-hidden  rounded-md border-[2px]  border-gray-800 hidden'>
                       <Image
                     src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
                     alt={movie.poster_path}
