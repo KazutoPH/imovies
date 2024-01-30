@@ -18,12 +18,12 @@ function SearchBar() {
     } else {
       params.delete('search');
     }
-  
+    replace(`${pathname}?${params.toString()}`);
   }
 
-  // function removeSearch(){
-  //   params.delete('search');
-  // }
+  function removeSearch(){
+    params.delete('search');
+  }
 
   return (
     <div className='flex flex-row items-center bg-white w-full rounded-sm overflow-hidden px-2'>
@@ -35,7 +35,7 @@ function SearchBar() {
         handleSearch(e.target.value)
       }}
       onBlur={(e)=> {
-        params.delete('search');
+        replace(`${pathname}`)
       }
       }
     />
