@@ -23,11 +23,13 @@ function SearchBar() {
 
   function removeSearch(){
     params.delete('search');
+    replace(`${pathname}?${params.toString()}`)
   }
 
   return (
     <div className='flex flex-row items-center bg-white w-full rounded-sm overflow-hidden px-2'>
-    <input className=' outline-none p-1 flex-1 text-base'
+    <input className=' outline-none p-1 flex-1 text-base text-black'
+      placeholder='Search...'
       onChange={(e) => {
         handleSearch(e.target.value);
       }}
@@ -35,9 +37,10 @@ function SearchBar() {
         handleSearch(e.target.value)
       }}
       onBlur={(e)=> {
-        replace(`${pathname}`)
+        removeSearch()
       }
       }
+      
     />
 
       <div 

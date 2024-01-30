@@ -17,29 +17,43 @@ function Modal() {
   const search = searchParams.get('trailer')
   let result:any
 
-  useEffect(()=> {
-    // async function getData(){
 
-    //   if(search !== null){
-    //     const result = await getTrailer(search?.toString())
-    //     setIsLoading(true)
+  useEffect(() => {
+    const fetchData = async () => {
+      setShow(true)
+      const result = await getTrailer(search?.toString());
+      setTrailer(await result);
+    };
 
-    //   }     
+    if (search)
+      fetchData()
+
+  }, [search])
+
+  // useEffect(()=> {
+  //   async function getData(){
+
+  //     if(search !== null){
+  //       const result = await getTrailer(search?.toString())
+  //       setIsLoading(true)
+
+  //     }     
+  //   }
+
+    
+
+    // if(search !== null) {
+    //   setShow(true)
+    //   getTrailer(search?.toString()).then((res) => {
+    //     result = res
+    //     setTrailer(result)
+    //     // console.log(trailer)
+    //     // console.log(result)
+    //   })
+
     // }
 
-    if(search !== null) {
-      setShow(true)
-      getTrailer(search?.toString()).then((res) => {
-        result = res
-        setTrailer(result)
-        // console.log(trailer)
-        // console.log(result)
-      })
-
-    }
-
-  },[search])
-
+  // },[search])
 
   return (
     <div className={`darkbg ${show ? 'flex':'hidden'}`} onClick={()=> {
@@ -49,7 +63,10 @@ function Modal() {
       }}>
       <div className=' h-auto w-4/5'>
     
-      <iframe className='w-full aspect-video' src={`https://www.youtube.com/embed/${trailer}?&autoplay=1`} title="Movie Trailer" allow="autoplay; picture-in-picture;" allowFullScreen></iframe>
+      {trailer &&
+        <iframe className='w-full aspect-video' src={`https://www.youtube.com/embed/${trailer}?&autoplay=1`} title="Movie Trailer" allow="autoplay; picture-in-picture;" allowFullScreen></iframe>
+      }
+      
  
 
       </div>

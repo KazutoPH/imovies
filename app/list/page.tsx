@@ -1,22 +1,37 @@
+"use client"
+
 import Movies from '@/components/movies'
 import SearchBar from '@/components/searchbar'
-import { searchMovie } from '@/lib/actions/movies.action'
-import React from 'react'
+import Selection from '@/components/selection'
+import { useSearchParams } from 'next/navigation'
+import { getMovies, searchMovie } from '@/lib/actions/movies.action'
+import React, { useEffect, useState } from 'react'
 
-async function page({ searchParams }: { searchParams: { [key: string]: string | string[] | undefined } }) {
-  const search = typeof searchParams.search === 'string' ? searchParams.search : undefined
+function page() {
+  const [result, setResult] = useState<any>()
+  const searchParams = useSearchParams()
+ 
+  const type = searchParams.get('type')
+  const query = searchParams.get('query')
 
-  console.log(search)
+  useEffect(() => {
+    setResult('')
+    const fetchData = async () => {
+      const result = await getMovies(type, query);
+      setResult(await result);
+    };
 
-  let result = await searchMovie(search)
+    if (query)
+      fetchData()
 
+  }, [query, type])
+  
   return (
     <div className='flex flex-col items-center'>
-
+      
       <div className='content-container'>
-        <h1 className='text-white text-3xl font-extrabold self-start'>Search</h1>
-        <SearchBar />
-        <Movies movies={result}/>
+      <Selection/>
+      <Movies movies={result} type={'movie'}/>
       </div>
     </div>
 

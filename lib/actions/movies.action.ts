@@ -11,7 +11,7 @@ export async function trendingMovies() {
   return trending
 }
 
-export async function getTrailer(id:string){
+export async function getTrailer(id:any){
   const trailer = await 
   fetch(`${apihttp}/movie/${id}/videos?api_key=${process.env.THEMOVIESDB_API_KEY}&language=en-US`)
   .then(res =>  res.json())
@@ -64,9 +64,8 @@ export async function getTvSeriesById(id:string){
 }
 
 export async function searchMovie(search:any){  
-  let apiURL =`${apihttp}/movie/popular?api_key=${process.env.THEMOVIESDB_API_KEY}&append_to_response=videos&language=en-US&page=1&`
-  if(search)
-  apiURL=`${apihttp}/search/multi?query=${search}&api_key=${process.env.THEMOVIESDB_API_KEY}&language=en-US`
+
+  const apiURL=`${apihttp}/search/multi?query=${search}&api_key=${process.env.THEMOVIESDB_API_KEY}&language=en-US`
 
   const movie = await
   fetch(apiURL)
@@ -74,6 +73,17 @@ export async function searchMovie(search:any){
   .then(json =>{ return json.results})
 
   // console.log(movie)
+  return movie
+}
+
+export async function getMovies(type:any, query: any){  
+
+  const movie = await
+  fetch(`${apihttp}/${type}/${query}?&api_key=${process.env.THEMOVIESDB_API_KEY}&language=en-US`)
+  .then(res =>  res.json())
+  .then(json =>{ return json})
+
+  console.log(movie)
   return movie
 }
 

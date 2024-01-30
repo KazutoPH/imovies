@@ -1,13 +1,28 @@
 export const navList = [
   {
-    name: 'Popular',
+    name: 'Movies',
+    type:'movie'
   },
   {
-    name: 'TopRated',
+    name: 'TV Shows',
+    type: 'tv'
+  },
+]
+
+export const selection = [
+  {
+    name: 'Popular',
+    type: 'popular'
+  },
+  {
+    name: 'Top Rated',
+    type: 'top_rated'
   },
   {
     name: 'Upcoming',
+    type: 'upcoming'
   },
+
 ]
 
 export const carouselMovies = [

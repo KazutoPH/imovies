@@ -26,7 +26,10 @@ function Header() {
         
         <div className='flex flex-row gap-5'>
           {navList.map((nav, i) =>
-            <p key={i} className='font-semibold text-lg text-white'>{nav.name}</p>
+          <Link href={`/list?type=${nav.type}&query=popular`} key={i}>
+            <p key={i} className='font-semibold text-lg text-white whitespace-nowrap'>{nav.name}</p>
+          </Link>
+
           )}
         </div>
       </nav>

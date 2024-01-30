@@ -57,7 +57,7 @@ function Carousel({ trending }: any) {
         <div
           className='flex justify-start items-start overflow-hidden relative'
         >
-          {trending && trending.map((movie:any, i:any) =>
+          {trending && trending.map((movie: any, i: any) =>
             <div
               style={{ transform: `translateX(-${currentSlide * 100}%)` }}
               className='relative flex h-[600px] min-w-full items-center transition-transform ease-out duration-1000' key={i}>
@@ -67,11 +67,11 @@ function Carousel({ trending }: any) {
                 <div className='relative h-full w-full '>
                   <Image
                     src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
-                    alt={movie.backdrop_path}
+                    alt={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
                     fill
                     unoptimized
                     priority
-                    className='object-cover relative -z-10'
+                    className='object-cover relative -z-10 w-auto h-auto'
                   />
 
                   <div className='carouselgradient z-20' />
@@ -86,43 +86,43 @@ function Carousel({ trending }: any) {
                     <p className='text-3xl font-medium text-white'>{movie.release_date}</p>
                   </div>
                   <div className=''>
-                  <p className='text-lg text-white leading-5 line-clamp-[10] sm:line-clamp-[14] '>{movie.overview}</p>
-                 </div>   
-                  
+                    <p className='text-lg text-white leading-5 line-clamp-[10] sm:line-clamp-[14] '>{movie.overview}</p>
+                  </div>
+
 
                   <div className='flex gap-5 mt-2 items-center flex-wrap justify-center min-w-[414px]:justify-start'>
-                  <Link href={`/movie/${movie.id}`}>
-                    <button className='btn whitespace-nowrap'>
-                      Watch Now
-                    </button>
-                  </Link>
+                    <Link href={`/movie/${movie.id}`}>
+                      <button className='btn whitespace-nowrap'>
+                        Watch Now
+                      </button>
+                    </Link>
 
                     <button className='btn2 whitespace-nowrap'
-                    onClick={()=> router.push(`${pathname}?trailer=${movie.id}`)}>
+                      onClick={() => router.push(`${pathname}?trailer=${movie.id}`)}>
                       Watch Trailer
                     </button>
-                  </div>  
+                  </div>
                 </div>
 
-                  <motion.div
+                <motion.div
                   initial={{ opacity: 0, scale: 0 }}
                   transition={{ duration: 0.2, type: 'spring', stiffness: 100 }}
                   whileInView={{ opacity: 1, scale: 1 }}
-                    className='md:flex relative min-h-[420px] w-[330px] overflow-hidden  rounded-md border-[2px]  border-gray-800 hidden'>
-                      <Image
+                  className='md:flex relative min-h-[420px] w-[330px] overflow-hidden  rounded-md border-[2px]  border-gray-800 hidden'>
+                  <Image
                     src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
-                    alt={movie.poster_path}
-                        fill
-                        unoptimized
-                        className='object-cover'
-                      />
-                  </motion.div>
+                    alt={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
+                    fill
+                    unoptimized
+                    className='object-cover w-auto h-auto'
+                  />
+                </motion.div>
               </div>
             </div>
           )}
         </div>
         <div className='absolute bottom-10 flex gap-5 left-1/2 -translate-x-1/2 z-50'>
-          {trending && trending.map((movie:any, i:any) =>
+          {trending && trending.map((movie: any, i: any) =>
             <div onClick={() => setCurrentSlide(i)} className={`h-2 w-2 rounded-full ${currentSlide === i ? ' bg-white' : ' bg-gray-500'} hover:cursor-pointer`} key={i} />
           )}
 

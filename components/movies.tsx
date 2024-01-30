@@ -8,6 +8,8 @@ import { useEffect } from "react";
 import Link from "next/link";
 
 function Movies({ movies, title, type }: any) {
+
+  
   // console.log(movies)
   return (
     <div className='content-container py-10'>
@@ -16,7 +18,18 @@ function Movies({ movies, title, type }: any) {
       ):null}
       <div className='gridcontainer w-full mt-5'>
         {movies && movies?.results?.map((movie: any, i: any) =>
-          <div className="relative" key={i}>
+          <motion.div
+          variants={{
+            visible: { opacity: 1 },
+            hidden: { opacity: 0 }
+          }}
+          initial={{ opacity: 0 }}
+          transition={{ delay: i*0.05 }}
+          whileInView="visible"
+          viewport={{ once: true }}
+          
+          className="relative" 
+          key={i}>
             <Link href={`/${type}/${movie.id}`}>
             <motion.div
               whileHover={{ scale: 1.2, zIndex: 50 }}
@@ -24,10 +37,10 @@ function Movies({ movies, title, type }: any) {
               <div className=" absolute h-full w-full ">
                 <Image
                   src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
-                  alt={movie.poster_path}
+                  alt={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
                   fill
                   unoptimized
-                  className='object-cover relative'
+                  className='object-cover relative w-auto h-auto'
                 />
                 <div className=' absolute top-0 bottom-0 left-0 right-0 group-hover:shadow-[inset_0px__-100px_100px_rgba(0,0,0,0.8)] box-border z-30 duration-300' />
               </div>
@@ -49,7 +62,7 @@ function Movies({ movies, title, type }: any) {
               </div>
             </motion.div>
             </Link>
-          </div>
+          </motion.div>
         )}
       </div>
     </div>
