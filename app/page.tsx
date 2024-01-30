@@ -11,14 +11,14 @@ export default async function Home() {
   const movies = await popularMovies()
   const tv = await popularTvSeries()
   
-   console.log(tv)
+  //  console.log(tv)
 
   return (
     <main className="flex flex-col min-h-screen items-center w-full">
       <Carousel trending={trending}/>
 
       <Movies movies={movies} title={'Movies'} type={'movie'}/>
-      <Movies movies={tv} title={'TV Series'} type={'tvSeries'}/>
+      <Movies movies={tv} title={'TV Series'} type={'tv'}/>
       <Modal/>
     </main>
   )

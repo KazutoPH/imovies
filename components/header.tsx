@@ -1,6 +1,8 @@
 import React from 'react'
 import { navList } from '../constants/constant'
 import Link from 'next/link'
+import SearchBar from './searchbar'
+import SearchResults from './searchResult'
 
 function Header() {
   return (
@@ -11,6 +13,17 @@ function Header() {
           <p className='font-extrabold text-3xl'>iMovies</p>
         </div>
         </Link>
+
+        <div className='w-full relative'>
+        <div className='flex flex-row w-full'>
+          <div>
+
+          </div>
+          <SearchBar/>
+        </div>
+          <SearchResults/>
+        </div>
+        
         <div className='flex flex-row gap-5'>
           {navList.map((nav, i) =>
             <p key={i} className='font-semibold text-lg text-white'>{nav.name}</p>

@@ -68,7 +68,7 @@ function MovieDetails({ movie }: any) {
                 <div className='flex flex-row gap-5'>
                   {movie.credits?.cast?.slice(0, 5).map((cast: any, i: any) =>
                     <div className=' flex-wrap max-w-min' key={i}>
-                      <div className=' h-[150px] w-[130px] relative'>
+                      <div className=' h-[160px] w-[130px] relative'>
                         <Image
                           src={`https://image.tmdb.org/t/p/original${cast.profile_path}`}
                           alt={`https://image.tmdb.org/t/p/original${cast.profile_path}`}

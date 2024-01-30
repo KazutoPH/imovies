@@ -8,7 +8,7 @@ import { useEffect } from "react";
 import Link from "next/link";
 
 function Movies({ movies, title, type }: any) {
-  console.log(movies)
+  // console.log(movies)
   return (
     <div className='content-container py-10'>
       {title? (

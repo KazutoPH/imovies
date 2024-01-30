@@ -59,22 +59,21 @@ export async function getTvSeriesById(id:string){
   .then(res =>  res.json())
   .then(json =>{ return json})
 
-  console.log(tv)
+  // console.log(tv)
   return tv
 }
 
 export async function searchMovie(search:any){  
   let apiURL =`${apihttp}/movie/popular?api_key=${process.env.THEMOVIESDB_API_KEY}&append_to_response=videos&language=en-US&page=1&`
   if(search)
-  apiURL=`${apihttp}/search/movie?query=${search}&api_key=${process.env.THEMOVIESDB_API_KEY}&language=en-US`
+  apiURL=`${apihttp}/search/multi?query=${search}&api_key=${process.env.THEMOVIESDB_API_KEY}&language=en-US`
 
   const movie = await
   fetch(apiURL)
   .then(res =>  res.json())
-  .then(json =>{ return json})
+  .then(json =>{ return json.results})
 
-  console.log(movie)
-
+  // console.log(movie)
   return movie
 }
 

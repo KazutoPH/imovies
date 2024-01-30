@@ -32,8 +32,8 @@ function Modal() {
       getTrailer(search?.toString()).then((res) => {
         result = res
         setTrailer(result)
-        console.log(trailer)
-        console.log(result)
+        // console.log(trailer)
+        // console.log(result)
       })
 
     }
