@@ -29,11 +29,9 @@ function SearchBar() {
     <div className='flex flex-row items-center bg-white w-full rounded-sm overflow-hidden px-2'>
     <input className=' outline-none p-1 flex-1 text-base'
       onChange={(e) => {
-        e.preventDefault()
         handleSearch(e.target.value);
       }}
       onFocus={(e) => {
-        e.preventDefault()
         handleSearch(e.target.value)
       }}
       onBlur={(e)=> {
