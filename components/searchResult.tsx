@@ -44,7 +44,7 @@ function SearchResults() {
         transition={{ duration: 0.5 }}
         exit={{ height: 0 }}
 
-        className='mt-2 flex flex-col max-h-[400px] w-full bg-zinc-800 absolute z-50 overflow-scroll'>
+        className='mt-2 flex flex-col max-h-[400px] w-full bg-zinc-800 absolute z-50 overflow-y-scroll'>
           {searchResult && searchResult?.filter( (item:any) => item.media_type !== "person" ).map((data: any, i: any) =>
           <Link href={`/${data.media_type}/${data.id}`} key={i}>
             <div className='flex flex-row w-full gap-5 p-2 border-b-[1px] border-gray-400'>

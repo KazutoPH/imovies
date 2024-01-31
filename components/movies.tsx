@@ -33,7 +33,7 @@ function Movies({ movies, title, type }: any) {
             <Link href={`/${type}/${movie.id}`}>
             <motion.div
               whileHover={{ scale: 1.2, zIndex: 50 }}
-              className='group flex items-end relative w-full h-full aspect-[2/3] overflow-hidden  rounded-md border-[2px]  border-gray-800'>
+              className='group flex items-end relative w-full h-full aspect-[2/3] overflow-hidden  rounded-md border-[2px] bg-gray-800  border-gray-800'>
               <div className=" absolute h-full w-full ">
                 <Image
                   src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
