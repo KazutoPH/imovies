@@ -4,6 +4,7 @@ import { carouselMovies } from '@/constants/constant'
 import Movies from '@/components/movies'
 import { popularMovies, popularTvSeries, trendingMovies } from '@/lib/actions/movies.action'
 import Modal from '@/components/modal'
+import MovieCarousel from '@/components/movieCarousel'
 
 export default async function Home() {
 
@@ -17,7 +18,7 @@ export default async function Home() {
     <main className="flex flex-col min-h-screen items-center w-full">
       <Carousel trending={trending}/>
 
-      <Movies movies={movies} title={'Movies'} type={'movie'}/>
+      <MovieCarousel movies={movies} title={'Movies'} type={'movie'}/>
       <Movies movies={tv} title={'TV Series'} type={'tv'}/>
       <Modal/>
     </main>

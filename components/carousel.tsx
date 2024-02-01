@@ -1,10 +1,10 @@
 "use client"
 import { carouselMovies } from '@/constants/constant'
 import Image from 'next/image'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { FaChevronLeft } from "react-icons/fa6";
 import { FaChevronRight } from 'react-icons/fa6';
-import { motion } from 'framer-motion';
+import { motion, useInView, useMotionValue } from 'framer-motion';
 import { useRouter, usePathname } from "next/navigation";
 import Link from 'next/link';
 
@@ -14,20 +14,53 @@ function Carousel({ trending }: any) {
   const [maxHeight, setMaxHeight] = useState(600)
   const router = useRouter()
   const pathname = usePathname()
+  const carouselRef = useRef<HTMLDivElement>(null)
+
+  const [dragging, setDragging] = useState(false)
+  const dragBuffer = 50
+  const dragX = useMotionValue(0)
+
 
   useEffect(() => {
 
-    if (!buttonPress)
+    if(!dragging) {
+      if (!buttonPress)
       var timer = setTimeout(() => setCurrentSlide((currentSlide) => (currentSlide === trending.length - 1 ? 0 : currentSlide + 1)), 5000)
 
     if (buttonPress)
       var timer = setTimeout(() => setCurrentSlide((currentSlide) => (currentSlide === trending.length - 1 ? 0 : currentSlide + 1)), 15000)
-
+    }
     return () => {
       clearTimeout(timer);
     }
 
-  }, [currentSlide]);
+  }, [currentSlide, dragging]);
+
+  const onDragStart = () => {
+    setDragging(true);
+  }
+
+  const onDragEnd = () => {
+    setDragging(false);
+    const x = dragX.get();
+
+    if (x <= -dragBuffer && currentSlide < trending.length - 1 ) {
+      setCurrentSlide((i) => i + 1)
+    }
+    else if (x >= dragBuffer && currentSlide > 0 ) {
+      setCurrentSlide((i) => i - 1)
+    }
+
+  }
+
+  const SPRING_ANIMATION = {
+    type:"spring",
+    mass: 3,
+    stiffness:400,
+    damping: 50,
+  }
+
+
 
   return (
     <div className='w-full'>
@@ -54,13 +87,21 @@ function Carousel({ trending }: any) {
           }}>
           <FaChevronRight color='white' size={40} />
         </motion.button>
-        <div
-          className='flex justify-start items-start overflow-hidden relative'
+        <motion.div
+          drag="x"
+          style={{ x: dragX }}
+          onDrag={onDragStart}
+          onDragEnd={onDragEnd}
+          dragConstraints={{ left: 0, right: 0 }}
+          animate={{ translateX: `-${currentSlide * 100}%` }}
+          transition={SPRING_ANIMATION}
+          ref={carouselRef}
+          className='flex active:cursor-grabbing justify-start items-start w-full relative'
         >
           {trending && trending.map((movie: any, i: any) =>
-            <div
-              style={{ transform: `translateX(-${currentSlide * 100}%)` }}
-              className='relative flex h-[600px] min-w-full items-center transition-transform ease-out duration-1000' key={i}>
+            <motion.div 
+            transition={SPRING_ANIMATION}
+              className='relative flex h-[600px] min-w-full items-center transition-transform ease-out duration-1000 snap-start ' key={i}>
 
 
               <div className={`absolute h-full w-full z-10 `} key={i}>
@@ -118,9 +159,9 @@ function Carousel({ trending }: any) {
                   />
                 </motion.div>
               </div>
-            </div>
+            </motion.div>
           )}
-        </div>
+        </motion.div>
         <div className='absolute bottom-10 flex gap-5 left-1/2 -translate-x-1/2 z-50'>
           {trending && trending.map((movie: any, i: any) =>
             <div onClick={() => setCurrentSlide(i)} className={`h-2 w-2 rounded-full ${currentSlide === i ? ' bg-white' : ' bg-gray-500'} hover:cursor-pointer`} key={i} />
@@ -133,5 +174,6 @@ function Carousel({ trending }: any) {
     </div>
   )
 }
+
 
 export default Carousel
