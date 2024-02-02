@@ -7,10 +7,20 @@ import { motion } from 'framer-motion';
 import { FaStar } from 'react-icons/fa6';
 import { useEffect } from "react";
 import Link from "next/link";
+import { useRouter } from 'next/navigation';
 
-function MovieCard({movie, i, type}: any) {
+function MovieCard({movie, i, type, startDrag, isDragging}: any) {
+  const router = useRouter()
+
   return (
     <motion.div
+    onClick={() => {
+      if(!isDragging){
+        router.push(`/${type}/${movie.id}`)
+      }
+    }
+    }
+    onPointerDown={startDrag}
     variants={{
       visible: { opacity: 1 },
       hidden: { opacity: 0 }
@@ -19,11 +29,12 @@ function MovieCard({movie, i, type}: any) {
     transition={{ delay: i * 0.05 }}
     whileInView="visible"
     viewport={{ once: true }}
-    className="relative"
+    className="relative cursor-pointer"
     key={i}>
-    <Link href={`/${type}/${movie.id}`}>
+      
       <motion.div
         whileHover={{ scale: 1.1, zIndex: 50 }}
+        onPointerDown={startDrag}
         className='group flex flex-col relative w-full '>
         <div className='group flex items-end relative w-full aspect-[2/3] overflow-hidden  rounded-md border-[2px] bg-gray-800  border-gray-800'>
           <div className=" absolute h-full w-full ">
@@ -58,7 +69,6 @@ function MovieCard({movie, i, type}: any) {
       {/* <div className="px-2">
             <p className=' text-white text-lg font-bold leading-[10%]'>{type === 'tv' ? movie.original_name : movie.original_title}</p>
           </div> */}
-    </Link>
   </motion.div>
   )
 }
