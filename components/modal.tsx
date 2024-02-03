@@ -56,21 +56,17 @@ function Modal() {
   // },[search])
 
   return (
-    <div className={`darkbg ${show ? 'flex':'hidden'}`} onClick={()=> {
+    <div className={`darkbg ${show ? 'flex':'hidden'} z-[100] relative`} onClick={()=> {
       router.push(`${pathname}`)
       setShow(false)
       setTrailer(undefined)
       }}>
-      <div className=' h-auto w-4/5'>
+      <div className=' h-auto w-[95%] sm:w-4/5'>
     
       {trailer &&
         <iframe className='w-full aspect-video' src={`https://www.youtube.com/embed/${trailer}?&autoplay=1`} title="Movie Trailer" allow="autoplay; picture-in-picture;" allowFullScreen></iframe>
-      }
-      
- 
-
+      }      
       </div>
-
     </div>
   )
 }
