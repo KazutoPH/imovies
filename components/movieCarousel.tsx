@@ -121,7 +121,7 @@ function MovieCarousel({ movies, title, type }: any) {
 
         <AnimatePresence>
           {showLeftButton &&
-            <div className="hidden sm:flex absolute left-0 top-0 bottom-0 z-[50] overflow-hidden rounded-sm">
+            <div className="hidden sm:flex absolute left-0 top-0 bottom-0 z-[70] overflow-hidden rounded-sm">
               <motion.button
                 initial={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
@@ -167,7 +167,7 @@ function MovieCarousel({ movies, title, type }: any) {
 
         <AnimatePresence>
           {showRightButton &&
-            <div className="hidden sm:flex absolute right-0 top-0 bottom-0 z-[60] overflow-hidden rounded-sm">
+            <div className="hidden sm:flex absolute right-0 top-0 bottom-0 z-[70] overflow-hidden rounded-sm">
               <motion.button
 
                 initial={{ opacity: 1 }}
