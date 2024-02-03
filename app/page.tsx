@@ -15,11 +15,11 @@ export default async function Home() {
   //  console.log(tv)
 
   return (
-    <main className="flex flex-col min-h-screen items-center w-full">
+    <main className="flex flex-col min-h-screen items-center w-full gap-4">
       <Carousel trending={trending}/>
-
+      
       <MovieCarousel movies={movies} title={'Movies'} type={'movie'}/>
-      <Movies movies={tv} title={'TV Series'} type={'tv'}/>
+      <MovieCarousel movies={tv}  title={'TV Series'} type={'tv'}/>
       <Modal/>
     </main>
   )

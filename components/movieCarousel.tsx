@@ -1,150 +1,193 @@
 "use client"
 
-import { carouselMovies } from "@/constants/constant"
-import Image from "next/image"
 import { AnimatePresence, motion, useAnimationControls, useDragControls, useTransform } from 'framer-motion';
 import { FaChevronLeft, FaChevronRight, FaStar } from 'react-icons/fa6';
 import { useEffect, useRef, useState } from "react";
-import Link from "next/link";
 import MovieCard from "./movieCard";
 
 function MovieCarousel({ movies, title, type }: any) {
   const controls = useDragControls()
   const [isDragging, setIsDragging] = useState(false)
-  const [currentSlide, setCurrentSlide] = useState<any>()
+  const [isClick, setIsCLick] = useState(false)
   const [containerWidth, setContainerWidth] = useState(0);
-  const [isReset, setIsReset] = useState(false);
   const [showLeftButton, setShowLeftButton] = useState(false)
-
+  const [showRightButton, setShowRightButton] = useState(true)
   const ref = useRef<HTMLDivElement>(null)
   const dragControls = useDragControls();
   const animationControls = useAnimationControls();
+  const [currentSlide, setCurrentSlide] = useState(0)
 
-  // useEffect(()=> {
-  //   console.log(ref.current?.outerWidth)
-  // },[containerWidth])
-
-  
 
   useEffect(() => {
-    function handleScreenResize(){
+    function handleScreenResize() {
       if (ref.current) {
         const newWidth = ref.current.scrollWidth - ref.current.offsetWidth;
         setContainerWidth(newWidth)
-        console.log(newWidth)
-        console.log('screenwidth', ref.current.offsetWidth)
+        // console.log(newWidth)
+        // console.log('screenwidth', ref.current.offsetWidth)
       }
     }
-
     handleScreenResize()
-
     window.addEventListener('resize', handleScreenResize);
 
-    // Cleanup function
     return () => {
       window.removeEventListener('resize', handleScreenResize);
     };
 
   }, [ref]);
-  // const onDragStart = (event:any, info:any) => {
-  //   setIsDragging(true)
-    
-  //   // if (!event.target.classList.contains("drag-handle")) {
-  //   //   controls.start(event);
-  //   // } else {
-  //   //   (controls as any).componentControls.forEach((entry:any) => {
-  //   //     entry.stop(event, info);
-  //   //   });
-  //   // }
-  // };
 
-  // console.log(movies)
 
   const SPRING_ANIMATION = {
-    type:"spring",
+    type: "spring",
     mass: 3,
-    stiffness:400,
+    stiffness: 400,
     damping: 50,
   }
 
   const onLeftPress = () => {
-    if(ref.current){
-    let total = currentSlide+ref.current.offsetWidth
-    if(total <= 0){
-    animationControls.set({
-      x: currentSlide+ref.current.offsetWidth,
-      y:0
-    })
-  } else {
-    animationControls.set({
-      x: 0,
-      y:0
-    })   
-  }
-  }
+    animationControls.stop()
+    let total
+    // console.log('left CurrentSlide', currentSlide)
+    if (ref.current) {
+      total = ref.current.offsetWidth + currentSlide
+
+      if (total < 0) {
+        animationControls.start({
+          x: total,
+          y: 0
+        })
+        setCurrentSlide(total)
+      } else {
+        animationControls.start({ x: 0 })
+      }
+
+    }
+
+    setIsCLick(true)
   }
 
-  const DRAGGING = (e:any) => {
-    if(e.x < 0 ) {
+  const onRightPress = () => {
+    animationControls.stop()
+    let total
+
+    if (ref.current) {
+      total = currentSlide - ref.current.offsetWidth
+
+      if (total > -containerWidth) {
+        animationControls.start({
+          x: total,
+          y: 0
+        })
+        setCurrentSlide(total)
+      } else {
+        animationControls.start({ x: -containerWidth })
+        setCurrentSlide(-containerWidth)
+      }
+    }
+    setIsCLick(true)
+  }
+
+  const DRAGGING = (e: any) => {
+
+    if (e.x < 0) {
       setShowLeftButton(true)
     } else {
       setShowLeftButton(false)
     }
-    setCurrentSlide(e.x)
 
-    console.log(e.x)
+    if (ref.current)
+      if (e.x > -containerWidth) {
+        setShowRightButton(true)
+
+      } else {
+        setShowRightButton(false)
+      }
+
+    if (!isClick)
+      setCurrentSlide(e.x)
+
+    // console.log("Drag", e.x)
   }
 
-  
+
   return (
-    <div className='content-container py-10 overflow-hidden '>
+    <div className='content-container overflow-hidden  z-50'>
 
       {title ? (
         <h1 className='text-white text-3xl font-extrabold self-start'>{title}</h1>
       ) : null}
 
-      <div className="relative sm:overflow-x-clip">
+      <div className="relative sm:overflow-x-clip py-2 sm:p-5">
 
-      <AnimatePresence>
-      {showLeftButton && 
-      <div className="absolute left-0 top-0 bottom-0 z-[100] overflow-hidden rounded-sm">
-            <motion.button
-            whileTap={{ scale: 1.1 }}
-            whileHover={{ scale: 1.2 }}
-            className='flex justify-center items-center h-full w-14 left-0 top-0 bottom-0 bg-gradient-to-r from-yellow-400 to-transparent'
-            onClick={() => {
-              onLeftPress()
-            }}>
-            <FaChevronLeft color='white' size={40} />
-          </motion.button>
+        <AnimatePresence>
+          {showLeftButton &&
+            <div className="hidden sm:flex absolute left-0 top-0 bottom-0 z-[50] overflow-hidden rounded-sm">
+              <motion.button
+                initial={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.5 }}
+                className='flex justify-center items-center h-full w-14 left-0 top-0 bottom-0 bg-gradient-to-r from-dark to-transparent'
+                onClick={() => onLeftPress()}>
+                <motion.div
+                  whileTap={{ scale: 1.1 }}
+                  whileHover={{ scale: 1.2 }}
+                  transition={{ duration: 0.5 }}>
+                  <FaChevronLeft color='white' size={40} />
+                </motion.div>
+
+              </motion.button>
+            </div>
+          }
+        </AnimatePresence>
+
+        <motion.div
+          ref={ref}
+          drag="x"
+          animate={animationControls}
+          transition={SPRING_ANIMATION}
+          dragControls={dragControls}
+          dragConstraints={{ left: -(containerWidth), right: 0 }}
+          onDragStart={() => {
+            setIsDragging(true)
+            setIsCLick(false)
+          }}
+          onDragEnd={() => {
+            setIsDragging(false)
+          }}
+          onUpdate={(e: any) => DRAGGING(e)}
+
+          className='flex flex-row w-full gap-2 z-[60] relative overflow-visible'>
+          {movies && movies?.results?.map((movie: any, i: any) =>
+            <div className=" min-w-[130px] sm:min-w-[200px]" key={i}>
+              <MovieCard movie={movie} i={i} type={type} isDragging={isDragging} />
+            </div>
+
+          )}
+        </motion.div>
+
+        <AnimatePresence>
+          {showRightButton &&
+            <div className="hidden sm:flex absolute right-0 top-0 bottom-0 z-[60] overflow-hidden rounded-sm">
+              <motion.button
+
+                initial={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.5 }}
+                className='flex justify-center items-center h-full w-14 left-0 top-0 bottom-0 bg-gradient-to-l from-dark to-transparent'
+                onClick={() => onRightPress()}>
+                <motion.div
+                  whileTap={{ scale: 1.1 }}
+                  whileHover={{ scale: 1.2 }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <FaChevronRight color='white' size={40} />
+                </motion.div>
+              </motion.button>
+            </div>
+
+          }
+        </AnimatePresence>
       </div>
-
-      }
-      </AnimatePresence>
- 
-      <motion.div 
-      ref={ref}
-      drag="x"
-      animate={animationControls}
-      dragControls={dragControls}
-      transition={SPRING_ANIMATION}
-      dragConstraints={{ left: -(containerWidth), right: 0}}
-      onDragStart={(e)=> {
-        // console.log(e)
-        setIsDragging(true)
-      }}
-      onDrag={(e)=> setIsDragging(true) }
-      onDragEnd={(e)=> console.log(e)}
-      onUpdate={(e:any)=> DRAGGING(e) }
-      className='flex flex-row w-full gap-2 z-[60] relative overflow-visible'>
-        {movies && movies?.results?.map((movie: any, i: any) =>
-        <div className=" min-w-[130px] sm:min-w-[200px]"  key={i}>
-          <MovieCard movie={movie} i={i} type={type} isDragging={isDragging}/>
-        </div>  
-          
-        )}
-      </motion.div>
-     </div> 
     </div>
   )
 }

@@ -9,33 +9,30 @@ import { useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from 'next/navigation';
 
-function MovieCard({movie, i, type, startDrag, isDragging}: any) {
+function MovieCard({ movie, i, type, isDragging }: any) {
   const router = useRouter()
 
   return (
     <motion.div
-    onClick={() => {
-      if(!isDragging){
-        router.push(`/${type}/${movie.id}`)
-      }
-    }
-    }
-    onPointerDown={startDrag}
-    variants={{
-      visible: { opacity: 1 },
-      hidden: { opacity: 0 }
-    }}
-    initial={{ opacity: 0 }}
-    transition={{ delay: i * 0.05 }}
-    whileInView="visible"
-    viewport={{ once: true }}
-    className="relative cursor-pointer"
-    key={i}>
-      
+      onClick={() => {
+        if (!isDragging) {
+          router.push(`/${type}/${movie.id}`)
+        }
+      }}
+      variants={{
+        visible: { opacity: 1 },
+        hidden: { opacity: 0 }
+      }}
+      initial={{ opacity: 0 }}
+      transition={{ delay: i * 0.05 }}
+      whileInView="visible"
+      viewport={{ once: true }}
+      className="relative cursor-pointer"
+      key={i}>
+
       <motion.div
-        whileHover={{ scale: 1.1, zIndex: 50 }}
-        onPointerDown={startDrag}
-        className='group flex flex-col relative w-full '>
+        whileHover={{}}
+        className='group flex flex-col relative w-full sm:hover:scale-110 ease-in duration-200'>
         <div className='group flex items-end relative w-full aspect-[2/3] overflow-hidden  rounded-md border-[2px] bg-gray-800  border-gray-800'>
           <div className=" absolute h-full w-full ">
             <Image
@@ -45,10 +42,10 @@ function MovieCard({movie, i, type, startDrag, isDragging}: any) {
               unoptimized
               className='object-cover relative w-auto h-auto'
             />
-            <div className=' absolute top-0 bottom-0 left-0 right-0 group-hover:shadow-[inset_0px__-100px_100px_rgba(0,0,0,0.8)] box-border z-30 duration-300' />
+            <div className=' absolute top-0 bottom-0 left-0 right-0 sm:group-hover:shadow-[inset_0px__-100px_100px_rgba(0,0,0,0.8)] box-border z-30 duration-300' />
           </div>
 
-          <div className="z-40 p-2 hidden group-hover:flex flex-col">
+          <div className="z-40 p-2 hidden sm:group-hover:flex flex-col">
             <p className=' text-white text-lg font-bold'>{type === 'tv' ? movie.original_name : movie.original_title}</p>
             <div className="flex justify-between items-center">
               <p className=' text-white text-sm font-light'>{type === 'tv' ? movie.first_air_date : movie.release_date}</p>
@@ -63,13 +60,13 @@ function MovieCard({movie, i, type, startDrag, isDragging}: any) {
             </div>
 
           </div>
-          </div>
+        </div>
 
       </motion.div>
       {/* <div className="px-2">
             <p className=' text-white text-lg font-bold leading-[10%]'>{type === 'tv' ? movie.original_name : movie.original_title}</p>
           </div> */}
-  </motion.div>
+    </motion.div>
   )
 }
 
