@@ -63,7 +63,7 @@ function Carousel({ trending }: any) {
 
 
   return (
-    <div className='w-full'>
+    <div className='w-full z-50'>
       <div className='relative z-30 overflow-hidden'>
 
         <motion.button
@@ -162,7 +162,7 @@ function Carousel({ trending }: any) {
             </motion.div>
           )}
         </motion.div>
-        <div className='absolute bottom-10 flex gap-5 left-1/2 -translate-x-1/2 z-50'>
+        <div className='absolute bottom-10 flex gap-5 left-1/2 -translate-x-1/2 z-40'>
           {trending && trending.map((movie: any, i: any) =>
             <div onClick={() => setCurrentSlide(i)} className={`h-2 w-2 rounded-full ${currentSlide === i ? ' bg-white' : ' bg-gray-500'} hover:cursor-pointer`} key={i} />
           )}

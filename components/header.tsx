@@ -1,12 +1,57 @@
-import React from 'react'
+"use client"
+
+import React, { useEffect, useState } from 'react'
 import { navList } from '../constants/constant'
+import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
 import SearchBar from './searchbar'
 import SearchResults from './searchResult'
 
+
 function Header() {
+  const [show, setShow] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
+  const controlNavbar = () => {
+    console.log(scrollY)
+    if(lastScrollY === 0 && window.scrollY < 100){
+      setShow(true)
+} else {
+  if (window.scrollY > lastScrollY) { // if scroll down hide the navbar
+    setShow(false); 
+  } else { // if scroll up show the navbar
+    setShow(true);  
+  }
+}
+    // remember current page location to use in the next move
+    setLastScrollY(window.scrollY); 
+  };
+  useEffect(() => {
+    window.addEventListener('scroll', controlNavbar);
+
+    // cleanup function
+    return () => {
+       window.removeEventListener('scroll', controlNavbar);
+    };
+  }, [lastScrollY]);
+
+
+
   return (
-    <div className='flex flex-col w-full items-center py-5'>
+    
+    <AnimatePresence initial={false} >
+    <motion.div 
+          variants={{
+            visible: { opacity: 1, display: 'flex' },
+            hidden: { opacity: 0,
+              transitionEnd: {
+                display: "none"
+              }
+            }
+          }}    
+    animate={ show ? 'visible' : 'hidden'}
+    transition={{ duration: 0.5 }}
+    className={`fixed flex flex-col w-full items-center py-5 shadow-yellow-400 shadow-sm z-[100] bg-dark overflow-visible`}>
       <nav className='content-container flex flex-row gap-10 items-center'>
         <Link href='/'>
         <div className='rounded-md px-2 py-1 bg-yellow-400'>
@@ -33,7 +78,9 @@ function Header() {
           )}
         </div>
       </nav>
-    </div>
+    </motion.div>
+  
+    </AnimatePresence>
   )
 }
 

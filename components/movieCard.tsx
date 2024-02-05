@@ -27,7 +27,7 @@ function MovieCard({ movie, i, type, isDragging }: any) {
       transition={{ delay: i * 0.05 }}
       whileInView="visible"
       viewport={{ once: true }}
-      className="relative cursor-pointer"
+      className="relative cursor-pointer hover:z-50"
       key={i}>
 
       <motion.div
