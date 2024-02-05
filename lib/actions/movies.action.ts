@@ -76,15 +76,14 @@ export async function searchMovie(search:any){
   return movie
 }
 
-export async function getMovies(type:any, query: any, page: number){  
+export async function getMovies(type:any, query: any, page: number) {  
+  
+    const movie = await
+    fetch(`${apihttp}/${type}/${query}?&api_key=${process.env.THEMOVIESDB_API_KEY}&page=${page}&language=en-US`)
+    .then(res =>  res.json())
+    .then(json =>{ return json})
+    return movie
 
-  const movie = await
-  fetch(`${apihttp}/${type}/${query}?&api_key=${process.env.THEMOVIESDB_API_KEY}&page=${page}&language=en-US`)
-  .then(res =>  res.json())
-  .then(json =>{ return json})
-
-  console.log(movie)
-  return movie
 }
 
 // export async function getMovieCast(id:string){
