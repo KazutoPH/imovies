@@ -37,8 +37,8 @@ function Movies() {
     console.log(result)
 
     if (newRresult.results) {
-      setError(false)
       setResult((oldData: any) => [...oldData, result])
+      setError(false)
     } else {
       setError(true)
     }
@@ -63,7 +63,7 @@ function Movies() {
       console.log(result)
     };
 
-    if (result && isInView) {
+    if (result.length - 1 >= 0  && isInView) {
       page++
       fetchData(page)
     }
@@ -73,49 +73,37 @@ function Movies() {
   // console.log(movies)
   return (
     <div className='flex flex-col  content-container py-5 gap-10'>
-      {/* <div className='gridcontainer w-full'>
-        {result ? (
-          error ? (
-            <p className=" text-white"> There was an Error Loading Movies </p>
-          ) : (
-            <>
-            
-            </>
-
-
-          )
-        )         
-        :(
-          pArray.map((skeleton)=>
-            skeleton
-          )
-        )}
-      </div> */}
-
       <div className='relative gridcontainer w-full z-[60]'>
-        {!error ? (
-          <>
-            {result.length - 1 >= 0 ? (
-              result.map((data, i) =>
-                data.results?.map((movie: any, index: any) =>
-                  <MovieCard movie={movie} i={index} type={type} key={index} />
-                )
-              )
-            ) :
-              (
+
+        {result.length - 1 >= 0 ? (
+          result.map((data, i) =>
+            data.results?.map((movie: any, index: any) =>
+              <MovieCard movie={movie} i={index} type={type} key={index} />
+            )
+          )
+        ) :
+          (
+            <>
+              {!error ? (
                 pArray.map((skeleton) =>
                   skeleton
-                ))
-            }
-          </>
-        ) : <p className=" text-white">There was an error Loading files</p>
+                )
+              ) : null}
+            </>
+          )
         }
 
+        {error &&
+          <p className=" text-white">There was an error Loading files</p>
+        }
       </div>
 
-      <div ref={ref} className="flex self-center">
-        <LoadingCircle />
-      </div>
+      {!error &&
+        <div ref={ref} className="flex self-center">
+          <LoadingCircle />
+        </div>
+      }
+
 
     </div>
   )
