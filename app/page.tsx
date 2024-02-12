@@ -18,8 +18,8 @@ export default async function Home() {
     <main className="flex flex-col min-h-screen items-center w-full gap-4">
       <Carousel trending={trending}/>
       
-      <MovieCarousel movies={movies} title={'Movies'} type={'movie'}/>
-      <MovieCarousel movies={tv}  title={'TV Series'} type={'tv'}/>
+      <MovieCarousel movies={movies} title={'Popular Movies'} type={'movie'}/>
+      <MovieCarousel movies={tv}  title={'Popular TV Series'} type={'tv'}/>
       <Modal/>
     </main>
   )
