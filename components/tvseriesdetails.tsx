@@ -8,7 +8,7 @@ function TVSeriesDetails({ movie }: any) {
       <div className=' w-full flex flex-col'>
         <div className='relative flex h-[600px] min-w-full w-full items-end transition-transform ease-out duration-1000 self-center z-10 bg-white'>
 
-          <div className={`absolute h-full w-full z-10 `} >
+          <div className={`absolute h-full w-full z-10`} >
             <div className='relative z-20 h-full w-full '>
               <div className='carouselgradient z-20' />
               <Image
@@ -22,7 +22,7 @@ function TVSeriesDetails({ movie }: any) {
           </div>
         </div>
 
-        <div className='flex flex-col z-20 -mt-[300px] px-10 gap-10 overflow-visible self-center content-container'>
+        <div className='flex flex-col z-20 -mt-[500px] px-10 gap-10 overflow-visible self-center content-container'>
           <div className='flex gap-5 flex-col sm:flex-row'>
             <div className='group flex self-center sm:self-start items-end relative h-full min-h-[500px] w-[300px] overflow-hidden  rounded-md border-[2px]  border-gray-800 postershadow'>
               <div className=" h-full w-full">
