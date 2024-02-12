@@ -12,7 +12,7 @@ function page() {
 
   
   return (
-    <div className='flex flex-col items-center mt-[85px]'>
+    <div className='flex flex-col items-center'>
       
       <div className='content-container'>
       <Selection/>
