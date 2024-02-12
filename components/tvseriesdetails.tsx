@@ -6,7 +6,7 @@ function TVSeriesDetails({ movie }: any) {
   return (
     <div className='flex w-full flex-col items-center pb-10'>
       <div className=' w-full flex flex-col'>
-        <div className='relative flex h-[600px] min-w-full w-full items-end transition-transform ease-out duration-1000 self-center z-10 bg-white'>
+        <div className='relative flex h-[600px] min-w-full w-full items-end transition-transform ease-out duration-1000 self-center z-10 bg-[#3b3b3b]'>
 
           <div className={`absolute h-full w-full z-10`} >
             <div className='relative z-20 h-full w-full '>
@@ -16,6 +16,7 @@ function TVSeriesDetails({ movie }: any) {
                 alt={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
                 fill
                 unoptimized
+                priority
                 className='object-cover relative -z-10'
               />
             </div>
