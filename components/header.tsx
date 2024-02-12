@@ -44,7 +44,7 @@ function Header() {
           hidden: { opacity: 0, height: 0, paddingTop: 0, paddingBottom: 0, overflow: 'hidden' }
         }}
         animate={show ? 'visible' : 'hidden'}
-        className={`fixed flex flex-col w-full items-center py-5 shadow-yellow-400 shadow-sm z-[100] bg-dark overflow-visible`}>
+        className={`fixed top-0 flex flex-col w-full items-center py-5 shadow-yellow-400 shadow-sm z-[100] bg-dark overflow-visible`}>
         <nav className='content-container flex flex-row gap-10 items-center'>
           <Link href='/'>
             <div className='rounded-md px-2 py-1 bg-yellow-400'>
