@@ -16,6 +16,7 @@ function MovieDetails({ movie }: any) {
                 alt={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
                 fill
                 unoptimized
+                priority
                 className='object-cover relative -z-10'
               />
             </div>
