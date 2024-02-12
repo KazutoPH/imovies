@@ -1,11 +1,43 @@
 export const navList = [
   {
     name: 'Movies',
-    type:'movie'
+    type:'movie',
+    category: [
+      {
+        name: 'Popular',
+        filter: 'popular',
+      },
+      {
+        name: 'Top Rated',
+        filter: 'top_rated',
+      },
+      {
+        name: 'Upcoming',
+        filter: 'upcoming',
+      },
+    ]
   },
   {
     name: 'TV Shows',
-    type: 'tv'
+    type: 'tv',
+    category: [
+      {
+        name: 'Popular',
+        filter: 'popular',
+      },
+      {
+        name: 'Top Rated',
+        filter: 'top_rated',
+      },
+      {
+        name: 'Airing Today',
+        filter: 'airing_today',
+      },
+      {
+        name: 'On The Air',
+        filter: 'on_the_air',
+      },
+    ]
   },
 ]
 
