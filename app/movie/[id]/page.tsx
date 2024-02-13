@@ -1,18 +1,19 @@
-import React from 'react'
-import { getMovieById } from '@/lib/actions/movies.action'
-import MovieDetails from '@/components/moviedetails'
+import React, { Suspense } from 'react'
+import Details from './details'
+import { MovieDetailSkeleton } from '@/components/skeleton'
+import Similar from './similar'
 
 async function page({ params }: { params: { id: string } }) {
-  const movie = await getMovieById(params.id)
-  // const credits = await getCredits(params.id)
-  // let officialTrailer
-  // if(movie)
-  //  officialTrailer = movie.videos.results.filter(( data:any) => data.name.includes('Official Trailer'))
-  // // // console.log(credits)
-  // console.log(officialTrailer)
+
   return (
     <>
-       <MovieDetails movie={movie}/>
+      <Suspense fallback={<MovieDetailSkeleton/>}>
+        <Details id={params.id}/>
+      </Suspense>
+
+      <Suspense>
+        <Similar id={params.id}/>
+      </Suspense>
     </>
   )
 }

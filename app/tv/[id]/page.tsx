@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import { getTvSeriesById } from '@/lib/actions/movies.action'
-import MovieDetails from '@/components/moviedetails'
-import TVSeriesDetails from '@/components/tvseriesdetails'
+import Details from './details'
+import Similar from './similar'
+import { MovieDetailSkeleton } from '@/components/skeleton'
 
 async function page({ params }: { params: { id: string } }) {
-  const tv = await getTvSeriesById(params.id)
   // const credits = await getCredits(params.id)
   // let officialTrailer
   // if(movie)
@@ -13,7 +13,13 @@ async function page({ params }: { params: { id: string } }) {
   // console.log(officialTrailer)
   return (
     <>
-       <TVSeriesDetails movie={tv}/>
+      <Suspense fallback={<MovieDetailSkeleton/>}>
+        <Details id={params.id}/>
+      </Suspense>
+
+      <Suspense>
+        <Similar id={params.id}/>
+      </Suspense>
     </>
   )
 }
