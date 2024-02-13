@@ -3,6 +3,7 @@ import React from 'react'
 import { FaStar } from 'react-icons/fa6'
 
 function MovieDetails({ movie }: any) {
+  
   return (
     <div className='flex w-full flex-col items-center pb-10'>
       <div className=' w-full flex flex-col'>
@@ -102,7 +103,7 @@ function MovieDetails({ movie }: any) {
             <div className=' w-full' key={i}>
               <p className='text-2xl text-white textShadow font-bold pb-2'>{data.name}</p>
               <div className=' h-auto w-full'>
-                <iframe className='w-full aspect-video' src={`https://www.youtube.com/embed/${data.key}`} title="Movie Trailer" allow="autoplay; picture-in-picture;" allowFullScreen></iframe>
+                <iframe className='w-full aspect-video max-h-[600px] min-h-[300px]' src={`https://www.youtube.com/embed/${data.key}`} title="Movie Trailer" allow="autoplay; picture-in-picture;" allowFullScreen></iframe>
               </div>
             </div>
 
