@@ -77,12 +77,24 @@ export async function searchMovie(search:any){
 }
 
 export async function getMovies(type:any, query: any, page: number) {  
-  
+
     const movie = await
     fetch(`${apihttp}/${type}/${query}?&api_key=${process.env.THEMOVIESDB_API_KEY}&page=${page}&language=en-US`)
     .then(res =>  res.json())
     .then(json =>{ return json})
     return movie
+
+}
+
+export async function getSimilar(type:any, id: any, page: number) {  
+
+  const movie = await
+  fetch(`${apihttp}/${type}/${id}/similar?&api_key=${process.env.THEMOVIESDB_API_KEY}&page=${page}&language=en-US`)
+  .then(res =>  res.json())
+  .then(json =>{ return json})
+
+  console.log(movie)
+  return movie
 
 }
 
