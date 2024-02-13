@@ -44,11 +44,11 @@ function Header() {
           hidden: { opacity: 0, height: 0, paddingTop: 0, paddingBottom: 0, overflow: 'hidden' }
         }}
         animate={show ? 'visible' : 'hidden'}
-        className={`fixed top-0 flex flex-col w-full items-center py-5 shadow-yellow-400 shadow-sm z-[100] bg-dark overflow-visible`}>
+        className={`fixed top-0 flex flex-col w-full items-center py-3 shadow-yellow-400 shadow-sm z-[100] bg-dark overflow-visible`}>
         <nav className='content-container flex flex-row gap-10 items-center'>
           <Link href='/'>
-            <div className='rounded-md px-2 py-1 bg-yellow-400'>
-              <p className='font-extrabold text-3xl'>iMovies</p>
+            <div className='rounded-md px-2 py-[2px] bg-yellow-400'>
+              <p className='font-extrabold text-2xl'>iMovies</p>
             </div>
           </Link>
 
@@ -62,13 +62,29 @@ function Header() {
             <SearchResults />
           </div>
 
-          <div className='flex flex-row gap-5'>
+          <div className='flex flex-row gap-2'>
             {navList.map((nav, i) =>
-              <Link href={`/list?type=${nav.type}&query=popular`} key={i}>
-                <p key={i} className='font-semibold text-lg text-white whitespace-nowrap'>{nav.name}</p>
-              </Link>
+              <div className='group'>
+                <Link href={`/list?type=${nav.type}&query=popular`} key={i}>
+                  <div className='p-2 -my-2 hover:bg-grey ease-in transition rounded'>
+                    <p key={i} className='font-semibold text-xl text-white whitespace-nowrap'>{nav.name}</p>
+                  </div>
 
+                </Link>
+
+                <div className='hidden group group-hover:md:flex hover:md:flex flex-col bg-darkgrey absolute rounded py-2 mt-[10px]'>
+                  {nav.category.map((category, x) =>
+                    <div className='hover:bg-grey ease-in transition hover:cursor-pointer py-2 px-4' key={x}>
+                      <Link href={`/list?type=${nav.type}&query=${category.filter}`}>
+                        <p key={x} className=' font-medium text-base text-white whitespace-nowrap'>{category.name}</p>
+                      </Link>
+
+                    </div>
+                  )}
+                </div>
+              </div>
             )}
+
           </div>
         </nav>
       </motion.div>
