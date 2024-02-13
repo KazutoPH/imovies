@@ -12,13 +12,14 @@ function Selection() {
   const { replace } = useRouter();
   const params = new URLSearchParams(searchParams);
   const [select, setSelect] = useState<any>(params.get('query'))
-
+  let movietype = params.get('type')
+  let query = params.get('query')
   const selectionList = navList.find(( list => list.type === params.get('type') ))
 
   useEffect(()=> {
     let query = params.get('query')
     setSelect(query)
-  },[pathname])
+  },[movietype, query])
   
   return (
     <div className='flex flex-col'>
@@ -26,7 +27,10 @@ function Selection() {
       <div className='flex flex-row gap-5'>
         {selectionList?.category.map((data, i) =>
 
-          <div className='flex flex-col items-center relative py-2 px-5 hover:cursor-pointer' key={i}
+          <motion.div 
+          whileHover={{ scale: 1.1 }}
+          transition={{ ease: 'easeIn', duration: 0.1 }}
+          className='flex flex-col items-center relative py-2 px-5 hover:cursor-pointer' key={i}
             onClick={() => {
               setSelect(data.filter)
               params.set('query', data.filter)
@@ -48,7 +52,7 @@ function Selection() {
                   
               </motion.div>
             )}
-          </div>
+          </motion.div>
 
 
         )}
