@@ -59,7 +59,11 @@ html, body {
   }
 
   .darkbg {
-    @apply bg-dark/90 fixed h-full w-full z-50 top-0 items-center justify-center
+    @apply bg-dark/80 fixed h-full w-full z-50 top-0 items-center justify-center
+  }
+
+  .sidenav {
+    @apply fixed h-full w-full z-50 top-0 items-center justify-center
   }
 
   /* .carouselImgContainer::before {

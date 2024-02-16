@@ -1,4 +1,4 @@
-import MovieCarousel from '@/components/movieCarousel'
+import MovieCarousel from '@/components/carousel/movieCarousel'
 import { getSimilar } from '@/lib/actions/movies.action'
 import React from 'react'
 

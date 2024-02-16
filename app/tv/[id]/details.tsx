@@ -1,4 +1,4 @@
-import MovieDetails from '@/components/moviedetails'
+import MovieDetails from '@/components/moviedetails/moviedetails'
 import { getTvSeriesById } from '@/lib/actions/movies.action'
 import React from 'react'
 

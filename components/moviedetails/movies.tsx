@@ -6,10 +6,10 @@ import { motion, useInView } from 'framer-motion';
 import { FaStar } from 'react-icons/fa6';
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import MovieCard from "./movieCard";
+import MovieCard from "../card/movieCard";
 import { useSearchParams } from "next/navigation";
 import { getMovies } from "@/lib/actions/movies.action";
-import { CardSKeleton, LoadingCircle, MovieListSkeleton } from "./skeleton";
+import { CardSKeleton, LoadingCircle, MovieListSkeleton } from "../skeleton";
 
 let page = 1
 

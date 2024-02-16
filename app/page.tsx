@@ -1,10 +1,10 @@
-import Carousel from '@/components/carousel'
+import Carousel from '@/components/carousel/carousel'
 import Image from 'next/image'
 import { carouselMovies } from '@/constants/constant'
-import Movies from '@/components/movies'
+import Movies from '@/components/moviedetails/movies'
 import { popularMovies, popularTvSeries, trendingMovies } from '@/lib/actions/movies.action'
 import Modal from '@/components/modal'
-import MovieCarousel from '@/components/movieCarousel'
+import MovieCarousel from '@/components/carousel/movieCarousel'
 
 export default async function Home() {
 
@@ -15,7 +15,7 @@ export default async function Home() {
   //  console.log(tv)
 
   return (
-    <main className="flex flex-col min-h-screen items-center w-full gap-4">
+    <main className="relative flex flex-col min-h-screen items-center w-full gap-4 z-[50]">
       <Carousel trending={trending}/>
       
       <MovieCarousel movies={movies} title={'Popular Movies'} type={'movie'}/>

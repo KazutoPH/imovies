@@ -1,7 +1,7 @@
 "use client"
 
-import Movies from '@/components/movies'
-import SearchBar from '@/components/searchbar'
+import Movies from '@/components/moviedetails/movies'
+import SearchBar from '@/components/header/searchbar'
 import Selection from '@/components/selection'
 import { useSearchParams } from 'next/navigation'
 import { getMovies, searchMovie } from '@/lib/actions/movies.action'

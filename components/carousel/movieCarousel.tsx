@@ -3,7 +3,7 @@
 import { AnimatePresence, motion, useAnimationControls, useDragControls, useTransform } from 'framer-motion';
 import { FaChevronLeft, FaChevronRight, FaStar } from 'react-icons/fa6';
 import { useEffect, useRef, useState } from "react";
-import MovieCard from "./movieCard";
+import MovieCard from "../card/movieCard";
 
 function MovieCarousel({ movies, title, type }: any) {
   const controls = useDragControls()
