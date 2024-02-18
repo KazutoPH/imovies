@@ -40,7 +40,7 @@ function TVSeriesDetails({ movie }: any) {
 
             <div className='flex-col z-20 flex flex-1 gap-5'>
               <div className='flex flex-col gap-1'>
-                <p className='text-5xl font-extrabold text-white textShadow'>{movie.original_name}</p>
+                <p className='text-5xl font-extrabold text-white textShadow'>{movie.name}</p>
                 <p className='text-base  text-white textShadow'>{movie.tagline}</p>
                 <div className='flex items-center'>
                   <p className='text-base  text-white textShadow mr-1'>{Math.round((movie.vote_average) * 10.0) / 10.0}</p>
@@ -56,7 +56,7 @@ function TVSeriesDetails({ movie }: any) {
                 <p className='text-base  text-white textShadow'>{movie.in_production? 'Ongoing':'Completed'}</p>
 
               </div>
-              <div className='flex flex-row gap-3'>
+              <div className='flex flex-row gap-3 flex-wrap'>
 
                 {movie.genres?.map((genre: any, i: any) =>
                   <div className='py-1 px-4 border-2 border-white rounded-full' key={i}>

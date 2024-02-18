@@ -59,7 +59,7 @@ export async function getTvSeriesById(id:string){
   .then(res =>  res.json())
   .then(json =>{ return json})
 
-  // console.log(tv)
+  console.log(tv)
   return tv
 }
 
@@ -93,7 +93,7 @@ export async function getSimilar(type:any, id: any, page: number) {
   .then(res =>  res.json())
   .then(json =>{ return json})
 
-  console.log(movie)
+  // console.log(movie)
   return movie
 
 }

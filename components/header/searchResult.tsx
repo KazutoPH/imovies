@@ -59,7 +59,7 @@ function SearchResults() {
               </div>
 
               <div className='flex flex-col flex-1'>
-              <p className=' text-xl leading-tight text-white textShadow font-bold'>{data.media_type=== 'tv' ? data.original_name : data.original_title}</p>
+              <p className=' text-xl leading-tight text-white textShadow font-bold'>{data.media_type=== 'tv' ? data.name : data.title}</p>
               <p className=' text-base text-white textShadow font-light'>{data.media_type=== 'tv' ? data.first_air_date : data.release_date}</p>
               <p className=' text-white text-sm font-normal italic line-clamp-1 text-ellipsis ... '>{data.overview}</p>
               </div>  

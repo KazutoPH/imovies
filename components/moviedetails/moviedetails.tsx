@@ -41,7 +41,7 @@ function MovieDetails({ movie }: any) {
 
             <div className='flex-col z-20 flex flex-1 gap-5'>
               <div className='flex flex-col gap-1'>
-                <p className='text-5xl font-extrabold text-white textShadow'>{movie.original_title}</p>
+                <p className='text-5xl font-extrabold text-white textShadow'>{movie.title}</p>
                 <p className='text-base  text-white textShadow'>{movie.tagline}</p>
                 <div className='flex items-center'>
                   <p className='text-base  text-white textShadow mr-1'>{Math.round((movie.vote_average) * 10.0) / 10.0}</p>
