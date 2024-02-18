@@ -59,7 +59,7 @@ export async function getTvSeriesById(id:string){
   .then(res =>  res.json())
   .then(json =>{ return json})
 
-  console.log(tv)
+  // console.log(tv)
   return tv
 }
 
