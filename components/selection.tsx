@@ -1,9 +1,9 @@
 "use client"
 
 import { selection } from '@/constants/constant'
-import { motion } from 'framer-motion'
+import { motion, useDragControls } from 'framer-motion'
 import { usePathname, useSearchParams, useRouter } from 'next/navigation';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { navList } from '@/constants/constant';
 
 function Selection() {
@@ -12,19 +12,39 @@ function Selection() {
   const { replace } = useRouter();
   const params = new URLSearchParams(searchParams);
   const [select, setSelect] = useState<any>(params.get('query'))
+  const [containerWidth, setContainerWidth] = useState(0);
   let movietype = params.get('type')
   let query = params.get('query')
+  const ref = useRef<HTMLDivElement>(null)
+  const dragControls = useDragControls();
+  
   const selectionList = navList.find(( list => list.type === params.get('type') ))
 
   useEffect(()=> {
+    handleScreenResize()
     let query = params.get('query')
     setSelect(query)
   },[movietype, query])
   
+
+  function handleScreenResize() {
+    if (ref.current) {
+      const newWidth = ref.current.scrollWidth - ref.current.offsetWidth;
+      setContainerWidth(newWidth)
+      // console.log(newWidth)
+      // console.log('screenwidth', ref.current.offsetWidth)
+    }
+  }
+
   return (
     <div className='flex flex-col'>
       <h1 className='text-white text-3xl font-bold mt-5 border-l-yellow-400 border-l-[5px] pl-5'>{selectionList?.name}</h1>
-      <div className='flex flex-row gap-5'>
+      <motion.div 
+      ref={ref}
+      drag="x"
+      dragControls={dragControls}
+      dragConstraints={{ left: -(containerWidth), right: 0 }}
+      className='flex flex-row gap-5'>
         {selectionList?.category.map((data, i) =>
 
           <motion.div 
@@ -36,7 +56,7 @@ function Selection() {
               params.set('query', data.filter)
               replace(`${pathname}?${params.toString()}`)
             }}>
-            <h1 className='text-white text-2xl font-bold'>{data.name}</h1>
+            <h1 className='text-white text-2xl font-bold whitespace-nowrap'>{data.name}</h1>
 
             {/* <div className=' absolute bottom-0 h-3 bg-red-600 w-full'/> */}
               
@@ -56,7 +76,7 @@ function Selection() {
 
 
         )}
-      </div>
+      </motion.div>
 
     </div>
 
