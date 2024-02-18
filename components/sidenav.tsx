@@ -13,16 +13,21 @@ function SideNav({setSideNavPress, sideNavPress}:Props) {
   const elementRef = useRef<HTMLDivElement>(null);
 
   return (
-    <div className='darkbg'>
-
+    <motion.div 
+    initial={{ background: 'rgb(18, 18, 18, 0)' }}
+    animate={{ background: 'rgb(18,18,18, 0.8)' }}
+    transition={{ duration: 0.2 }}
+    exit={{ background: 'rgb(18, 18, 18, 0)' }}
+    className='darkbg md:hidden'>
+      
       <motion.div
       ref={elementRef}
         initial={{ x: '100%' }}
         animate={{ x: 0 }}
-        transition={{ ease: 'easeInOut', duration: 0.2 }}
+        transition={{ ease: 'easeInOut', duration: 0.25 }}
         exit={{ x: '100%' }}
-      className='absolute right-0 h-full bg-dark z-50'>
-        <div className='flex flex-col px-5'>
+      className='absolute right-0 h-full bg-dark'>
+        <div className='flex flex-col px-[5vw] md:px-5'>
           <div
           onClick={ ()=> setSideNavPress(false) }
           className='flex self-end my-[15px] hover:cursor-pointer'>
@@ -40,7 +45,9 @@ function SideNav({setSideNavPress, sideNavPress}:Props) {
 
               <div>
                 {nav.category.map((category, x) =>
-                  <div className='hover:bg-grey ease-in transition hover:cursor-pointer py-2 px-4' key={x}>
+                  <div
+                  onClick={()=> setSideNavPress(false) }
+                  className='hover:bg-grey ease-in transition hover:cursor-pointer py-2 px-5' key={x}>
                     <Link href={`/list?type=${nav.type}&query=${category.filter}`}>
                       <p key={x} className=' font-medium text-base text-white whitespace-nowrap'>{category.name}</p>
                     </Link>
@@ -53,7 +60,7 @@ function SideNav({setSideNavPress, sideNavPress}:Props) {
         </div>
 
       </motion.div>
-    </div>
+    </motion.div>
   )
 }
 

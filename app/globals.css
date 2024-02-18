@@ -59,7 +59,7 @@ html, body {
   }
 
   .darkbg {
-    @apply bg-dark/80 fixed h-full w-full z-50 top-0 items-center justify-center
+    @apply bg-dark/80 fixed h-full w-full z-[100] top-0 items-center justify-center
   }
 
   .sidenav {

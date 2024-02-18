@@ -90,7 +90,7 @@ function Header() {
 
             <div
               onClick={() => setSideNavPress(!sideNavPress)}
-              className='relative md:hidden'>
+              className='relative md:hidden hover:cursor-pointer'>
               <FaBars
                 size={30}
                 color='white'
