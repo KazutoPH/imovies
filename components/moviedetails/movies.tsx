@@ -8,7 +8,7 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import MovieCard from "../card/movieCard";
 import { useSearchParams } from "next/navigation";
-import { getMovies } from "@/lib/actions/movies.action";
+import { getByGenre, getMovies } from "@/lib/actions/movies.action";
 import { CardSKeleton, LoadingCircle, MovieListSkeleton } from "../skeleton";
 
 let page = 1
@@ -19,6 +19,7 @@ function Movies() {
   const searchParams = useSearchParams()
   const type = searchParams.get('type')
   const query = searchParams.get('query')
+  const genre = searchParams.get('genreID')
   const ref = useRef(null)
   const isInView = useInView(ref)
 
@@ -27,17 +28,24 @@ function Movies() {
   useEffect(() => {
     setResult([])
 
-    if (query)
       initialFetchData()
 
-  }, [query, type])
+  }, [query, type, genre])
 
   const initialFetchData = async () => {
-    const newRresult = await getMovies(type, query, page);
+    
+    let newRresult:any;
+
+    if(query)
+    newRresult = await getMovies(type, query, page);
+
+    else
+    newRresult = await getByGenre(type, genre, page);
+  
     console.log(result)
 
     if (newRresult.results) {
-      setResult((oldData: any) => [...oldData, result])
+      setResult((oldData: any) => [...oldData, newRresult])
       setError(false)
     } else {
       setError(true)
@@ -55,7 +63,15 @@ function Movies() {
 
   useEffect(() => {
     const fetchData = async (page: number) => {
-      const Newresult = await getMovies(type, query, page);
+
+      let Newresult:any;
+
+      if(query)
+      Newresult = await getMovies(type, query, page);
+  
+      else
+      Newresult = await getByGenre(type, genre, page);
+    
       if (Newresult.results)
         setResult((oldData: any) => [...oldData, Newresult])
       // setResult(await result);
