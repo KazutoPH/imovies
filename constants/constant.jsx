@@ -1,6 +1,7 @@
 import { FaFilm } from "react-icons/fa6";
 import { GiTv } from "react-icons/gi"
 
+
 export const navList = [
   {
     name: 'Movies',
@@ -24,7 +25,7 @@ export const navList = [
   {
     name: 'TV Shows',
     type: 'tv',
-    icon: <FaFilm size={25} color='white' />,
+    icon: <GiTv size={25} color='white' />,
     category: [
       {
         name: 'Popular',
