@@ -33,6 +33,13 @@ html, body {
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   }
 
+  .gridNav {
+    display: grid;
+    grid-auto-flow: dense;
+    gap: 5px;
+    grid-template-columns: repeat(auto-fill, minmax(auto-fill, 1fr));
+  }
+
   .carouselgradient {
     @apply absolute top-0 left-0  w-full h-full bg-gradient-to-t from-dark/100 to-dark/20
   }
