@@ -23,7 +23,7 @@ function Movies() {
   const ref = useRef(null)
   const isInView = useInView(ref)
 
-  let pArray = new Array(10).fill(null).map((data, i) => <CardSKeleton key={i} />)
+  let pArray = new Array(12).fill(null).map((data, i) => <CardSKeleton key={i} />)
 
   useEffect(() => {
     setResult([])
