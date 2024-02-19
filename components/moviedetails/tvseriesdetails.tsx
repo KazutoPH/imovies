@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Link from 'next/link'
 import React from 'react'
 import { FaStar } from 'react-icons/fa6'
 
@@ -23,7 +24,7 @@ function TVSeriesDetails({ movie }: any) {
           </div>
         </div>
 
-        <div className='flex flex-col z-20 -mt-[500px] px-10 gap-10 overflow-visible self-center content-container'>
+        <div className='flex flex-col z-20 -mt-[500px] px-10 gap-10 self-center content-container'>
           <div className='flex gap-5 flex-col sm:flex-row'>
             <div className='group flex self-center sm:self-start items-end relative h-full min-h-[500px] w-[300px] overflow-hidden  rounded-md border-[2px]  border-gray-800 postershadow'>
               <div className=" h-full w-full">
@@ -48,20 +49,23 @@ function TVSeriesDetails({ movie }: any) {
                   <p className='text-base  text-white textShadow ml-5'>{`(${movie.vote_count}) votes`}</p>
                 </div>
                 <div className='flex flex-row'>
-                <p className='text-base  text-white textShadow'>{movie.number_of_seasons} Seasons</p>
-                <p className='text-base text-white textShadow pl-5'>{movie.episode_run_time} mins. episode runtime</p>
+                  <p className='text-base  text-white textShadow'>{movie.number_of_seasons} Seasons</p>
+                  <p className='text-base text-white textShadow pl-5'>{movie.episode_run_time} mins. episode runtime</p>
                 </div>
 
                 <p className='text-base  text-white textShadow'>First Air Date: {movie.first_air_date}</p>
-                <p className='text-base  text-white textShadow'>{movie.in_production? 'Ongoing':'Completed'}</p>
+                <p className='text-base  text-white textShadow'>{movie.in_production ? 'Ongoing' : 'Completed'}</p>
 
               </div>
+
               <div className='flex flex-row gap-3 flex-wrap'>
 
                 {movie.genres?.map((genre: any, i: any) =>
-                  <div className='py-1 px-4 border-2 border-white rounded-full' key={i}>
-                    <p className='text-base  text-white textShadow'>{genre.name}</p>
-                  </div>
+                  <Link href={`/list?type=tv&genre=${genre.name}&genreID=${genre.id}`} key={i}>
+                    <div className='py-1 px-4 border-2 border-white rounded-full' key={i}>
+                      <p className='text-base  text-white textShadow'>{genre.name}</p>
+                    </div>
+                  </Link>
                 )}
 
               </div>
@@ -104,7 +108,7 @@ function TVSeriesDetails({ movie }: any) {
           )}
         </div>
 
-        
+
       </div>
     </div>
   )
