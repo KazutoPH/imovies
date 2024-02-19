@@ -1,9 +1,10 @@
 import Image from 'next/image'
+import Link from 'next/link'
 import React from 'react'
 import { FaStar } from 'react-icons/fa6'
 
 function MovieDetails({ movie }: any) {
-  
+
   return (
     <div className='flex w-full flex-col items-center pb-10'>
       <div className=' w-full flex flex-col'>
@@ -51,12 +52,15 @@ function MovieDetails({ movie }: any) {
                 <p className='text-base text-white textShadow'>{movie.runtime} mins.</p>
                 <p className='text-base  text-white textShadow'>Release date: {movie.release_date}</p>
               </div>
-              <div className='flex flex-row gap-3'>
+              <div className='flex flex-row gap-3 flex-wrap'>
 
                 {movie.genres?.map((genre: any, i: any) =>
-                  <div className='py-1 px-4 border-2 border-white rounded-full' key={i}>
-                    <p className='text-base  text-white textShadow'>{genre.name}</p>
-                  </div>
+                  <Link href={`/list?type=movie&genre=${genre.name}&genreID=${genre.id}`} key={i}>
+                    <div className='py-1 px-4 border-2 border-white rounded-full'>
+                      <p className='text-base  text-white textShadow'>{genre.name}</p>
+
+                    </div>
+                  </Link>
                 )}
 
               </div>
