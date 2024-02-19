@@ -18,6 +18,7 @@ function Header() {
   const [lastScrollY, setLastScrollY] = useState(0);
   const [moviegenres, setMovieGenres] = useState<any[]>([])
   const [tvgenres, setTvGenres] = useState<any[]>([])
+  const [searchbarFocus, setSearchBarFocus] = useState(false)
 
   useEffect(() => {
     async function getMovieGenres() {
@@ -67,19 +68,20 @@ function Header() {
           }}
           animate={show ? 'visible' : 'hidden'}
           className={`fixed top-0 flex flex-col w-full items-center py-3 shadow-yellow-400 shadow-sm z-[50] bg-dark overflow-visible`}>
-          <nav className='content-container flex flex-row gap-10 items-center'>
-            <Link href='/'>
+
+          <nav className={`content-container flex flex-row gap-10 items-center`}>
+            <Link href='/' className={`${searchbarFocus ? 'hidden': 'flex'}`}>
               <div className='rounded-md px-2 py-[2px] bg-yellow-400'>
                 <p className='font-extrabold text-2xl'>iMovies</p>
               </div>
             </Link>
 
             <div className='w-full relative'>
-              <div className='hidden md:flex flex-row w-full'>
+              <div className='flex-row w-full'>
                 <div>
 
                 </div>
-                <SearchBar />
+                <SearchBar searchbarFocus={searchbarFocus} setSearchBarFocus={setSearchBarFocus} />
               </div>
               <SearchResults />
             </div>
@@ -94,9 +96,11 @@ function Header() {
                   onMouseLeave={() => {
                     setIsHover(false)
                   }}
+                  onClick={() => setIsHover(false)}
                 >
                   <Link href={`/list?type=${nav.type}&query=popular`} key={i}>
-                    <div className='p-2 -my-2 hover:bg-grey ease-in transition rounded'>
+                    <div 
+                    className='p-2 -my-2 hover:bg-grey ease-in transition rounded'>
                       <p key={i} className='font-semibold text-xl text-white whitespace-nowrap'>{nav.name}</p>
                     </div>
                   </Link>
@@ -110,38 +114,34 @@ function Header() {
                       className='w-max flex-col bg-darkgrey absolute right-0 rounded py-2 px-1 mt-[10px] overflow-hidden'>
                       <div className='grid grid-cols-3'>
                         {nav.category.map((category, x) =>
-                          <div className='hover:bg-grey ease-in transition hover:cursor-pointer py-2 px-4' key={x}>
-                            <Link href={`/list?type=${nav.type}&query=${category.filter}`}>
+                          <Link href={`/list?type=${nav.type}&query=${category.filter}`} key={x}>
+                            <div className='hover:bg-grey ease-in transition hover:cursor-pointer py-2 px-4'>
                               <p key={x} className=' font-medium text-base text-white whitespace-nowrap'>{category.name}</p>
-                            </Link>
+                            </div>
+                          </Link>
 
-                          </div>
                         )}
 
                         {selectedHover === 0 ? (
                           <>
                             {moviegenres.map((data, x) =>
-                              <div 
-                              onClick={()=> setIsHover(false)}
-                              className='hover:bg-grey ease-in transition hover:cursor-pointer py-2 px-4' key={x}>
-                                <Link href={`/list?type=${nav.type}&genre=${data.name}&genreID=${data.id}`}>
+                              <Link href={`/list?type=${nav.type}&genre=${data.name}&genreID=${data.id}`}>
+                                <div
+                                  className='hover:bg-grey ease-in transition hover:cursor-pointer py-2 px-4'>
                                   <p key={x} className=' font-medium text-base text-white whitespace-nowrap'>{data.name}</p>
-                                </Link>
-
-                              </div>
+                                </div>
+                              </Link>
                             )}
                           </>
                         ) :
                           <>
                             {tvgenres.map((data, x) =>
-                              <div 
-                              onClick={()=> setIsHover(false)}
-                              className='hover:bg-grey ease-in transition hover:cursor-pointer py-2 px-4' key={x}>
-                                <Link href={`/list?type=${nav.type}&genre=${data.name.replace(/&/g, '+')}&genreID=${data.id}`}>
+                              <Link href={`/list?type=${nav.type}&genre=${data.name.replace(/&/g, '+')}&genreID=${data.id}`} key={x}>
+                                <div
+                                  className='hover:bg-grey ease-in transition hover:cursor-pointer py-2 px-4' >
                                   <p className=' font-medium text-base text-white whitespace-nowrap'>{data.name}</p>
-                                </Link>
-
-                              </div>
+                                </div>
+                              </Link>
                             )}
                           </>
                         }
@@ -170,7 +170,12 @@ function Header() {
 
       <AnimatePresence>
         {sideNavPress &&
-          <SideNav setSideNavPress={setSideNavPress} sideNavPress={sideNavPress} />
+          <SideNav
+            setSideNavPress={setSideNavPress}
+            sideNavPress={sideNavPress}
+            moviegenres={moviegenres}
+            tvgenres={tvgenres}
+          />
         }
       </AnimatePresence>
     </div>
