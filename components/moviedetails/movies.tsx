@@ -88,7 +88,7 @@ function Movies() {
 
   // console.log(movies)
   return (
-    <div className='flex flex-col  content-container py-5 gap-10'>
+    <div className='flex flex-col py-5 gap-10'>
       <div className='relative gridcontainer w-full z-[50]'>
 
         {result.length - 1 >= 0 ? (
