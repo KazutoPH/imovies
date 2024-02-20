@@ -6,11 +6,16 @@ async function Similar(id:any) {
   const similar = await getSimilar('tv', id.id, 1)
   // console.log(similar)
   return (
-    <div className='flex justify-center w-full'>
-    <div className='max-w-7xl w-full'>
-     <MovieCarousel movies={similar} title={'Similar TV Series'} type={'tv'}/>
-    </div>
-    </div>
+    <>
+    {similar.results.length && 
+        <div className='flex justify-center w-full'>
+        <div className='max-w-7xl w-full'>
+         <MovieCarousel movies={similar} title={'Similar TV Series'} type={'tv'}/>
+        </div>
+        </div>
+    }
+
+    </>
   )
 }
 
