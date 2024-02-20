@@ -54,9 +54,8 @@ function SearchBar({ searchbarFocus, setSearchBarFocus }: Props) {
         onClick={() => setSearchBarFocus(true)}
         onBlur={(e) => {
           e.preventDefault()
-          setSearchBarFocus(false)
           removeSearch()
-e.preventDefault()
+          setSearchBarFocus(false)
         }
         }
       />
