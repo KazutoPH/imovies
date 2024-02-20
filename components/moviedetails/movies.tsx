@@ -89,7 +89,7 @@ function Movies() {
   // console.log(movies)
   return (
     <div className='flex flex-col py-5 gap-10'>
-      <div className='relative gridcontainer w-full z-[50]'>
+      <div className='relative gridcontainer w-full z-30'>
 
         {result.length - 1 >= 0 ? (
           result.map((data, i) =>
