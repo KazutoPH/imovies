@@ -42,18 +42,18 @@ function SearchBar({ searchbarFocus, setSearchBarFocus }: Props) {
         placeholder='Search...'
         value={input}
         onChange={(e) => {
-          e.target.focus({ preventScroll: true })
+          e.preventDefault()
           setInput(e.target.value)
           handleSearch(e.target.value);
         }}
         onFocus={(e) => {
-          e.target.focus({ preventScroll: true })
+          e.preventDefault()
           handleSearch(e.target.value);
           setSearchBarFocus(true)
         }}
         onClick={() => setSearchBarFocus(true)}
         onBlur={(e) => {
-          e.target.focus({ preventScroll: true })
+          e.preventDefault()
           setSearchBarFocus(false)
           removeSearch()
 e.preventDefault()
