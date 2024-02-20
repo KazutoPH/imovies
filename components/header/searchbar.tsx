@@ -56,6 +56,7 @@ function SearchBar({ searchbarFocus, setSearchBarFocus }: Props) {
           e.target.focus({ preventScroll: true })
           setSearchBarFocus(false)
           removeSearch()
+e.preventDefault()
         }
         }
       />
