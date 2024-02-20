@@ -12,31 +12,36 @@ function TVSeriesDetails({ movie }: any) {
           <div className={`absolute h-full w-full z-10`} >
             <div className='relative z-20 h-full w-full '>
               <div className='carouselgradient z-20' />
-              <Image
-                src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
-                alt={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
-                fill
-                unoptimized
-                priority
-                className='object-cover relative -z-10'
-              />
+              {movie.backdrop_path &&
+                <Image
+                  src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
+                  alt={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
+                  fill
+                  unoptimized
+                  priority
+                  className='object-cover relative -z-10'
+                />
+              }
             </div>
           </div>
         </div>
 
         <div className='flex flex-col z-20 -mt-[500px] px-10 gap-10 self-center content-container'>
           <div className='flex gap-5 flex-col sm:flex-row'>
-            <div className='group flex self-center sm:self-start items-end relative h-full min-h-[500px] w-[300px] overflow-hidden  rounded-md border-[2px]  border-gray-800 postershadow'>
-              <div className=" h-full w-full">
-                <Image
-                  src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
-                  alt={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
-                  fill
-                  unoptimized
-                  className='object-cover relative'
-                />
-                <div className=' absolute top-0 bottom-0 left-0 right-0 group-hover:shadow-[inset_0px__-100px_100px_rgba(0,0,0,0.8)] box-border z-30 duration-300' />
-              </div>
+            <div className='group flex self-center sm:self-start items-center justify-center relative h-full min-h-[500px] w-[300px] overflow-hidden  rounded-md border-[2px]  border-gray-800 postershadow'>
+              {movie.poster_path ? (
+                <div className=" h-full w-full flex justify-center items-center">
+                  <Image
+                    src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
+                    alt={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
+                    fill
+                    unoptimized
+                    className='object-cover relative'
+                  />
+                </div>
+              ) :
+                <p className=' text-white text-3xl font-bold text-center'>{movie.name}</p>
+              }
             </div>
 
             <div className='flex-col z-20 flex flex-1 gap-5'>
@@ -76,17 +81,27 @@ function TVSeriesDetails({ movie }: any) {
 
               <div className='flex flex-col gap-1'>
                 <p className='text-2xl text-white textShadow font-bold'>Cast</p>
-                <div className='flex flex-row gap-5'>
+                <div className='flex flex-row gap-5 flex-wrap'>
                   {movie.credits?.cast?.slice(0, 5).map((cast: any, i: any) =>
                     <div className=' flex-wrap max-w-min' key={i}>
-                      <div className=' h-[160px] w-[130px] relative'>
+                      <div className=' h-[160px] w-[130px] relative bg-white overflow-hidden'>
+                        {cast.profile_path ? (
                         <Image
-                          src={`https://image.tmdb.org/t/p/original${cast.profile_path}`}
-                          alt={`https://image.tmdb.org/t/p/original${cast.profile_path}`}
+                        src={`https://image.tmdb.org/t/p/original${cast.profile_path}`}
+                        alt={`https://image.tmdb.org/t/p/original${cast.profile_path}`}
+                        fill
+                        unoptimized
+                        className='object-cover relative'
+                      />
+                        ): (
+                          <Image
+                          src={'/assets/avatar.png'}
+                          alt={'avatar'}
                           fill
                           unoptimized
-                          className='object-cover relative'
+                          className='object-cover mt-5'
                         />
+                        )}
                       </div>
 
                       <p className='text-base  text-white textShadow'>{cast.name}</p>
