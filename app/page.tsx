@@ -16,71 +16,71 @@ export default function Home() {
   return (
     <main className="relative flex flex-col min-h-screen items-center w-full gap-4 z-30">
 
-      <Suspense fallback={<CarouselSkeleton/>}>
-        <CarouselRender/>
+      <Suspense fallback={<CarouselSkeleton />}>
+        <CarouselRender />
       </Suspense>
 
       <Suspense fallback={<p>Loadiing</p>}>
-        <PopularMovieRender/>
+        <PopularMovieRender />
       </Suspense>
       <div className='-mt-3'>
-          <Link href={`/list?type=movie&query=popular`}>
-            <div className='flex flex-row gap-1 items-center hover:scale-110 transition bg-yellow-400 rounded-md px-4 py-2'>
-              <p className=' text-dark text-[20px] font-semibold'>View More </p>
-              <FaChevronRight
-                color={'black'}
-                size={20}
-              />
-            </div>
-          </Link>
-        </div>
+        <Link href={`/list?type=movie&query=popular`}>
+          <div className='flex flex-row gap-2 items-center hover:scale-110 transition'>
+            <p className=' text-white text-[20px] font-semibold'>View More </p>
+            <FaChevronDown
+              color={'#FACC15'}
+              size={20}
+            />
+          </div>
+        </Link>
+      </div>
 
       <Suspense fallback={<p>Loadiing</p>}>
-        <TopRatedMovieRender/>
+        <TopRatedMovieRender />
       </Suspense>
       <div className='-mt-3'>
-          <Link href={`/list?type=movie&query=top_rated`}>
-            <div className='flex flex-row gap-1 items-center hover:scale-110 transition bg-yellow-400 rounded-md px-4 py-2'>
-              <p className=' text-dark text-[20px] font-semibold'>View More </p>
-              <FaChevronRight
-                color={'black'}
-                size={20}
-              />
-            </div>
-          </Link>
-        </div>
+        <Link href={`/list?type=movie&query=top_rated`}>
+          <div className='flex flex-row gap-2 items-center hover:scale-110 transition'>
+            <p className=' text-white text-[20px] font-semibold'>View More </p>
+            <FaChevronDown
+              color={'#FACC15'}
+              size={20}
+            />
+          </div>
+        </Link>
+      </div>
 
       <Suspense fallback={<p>Loadiing</p>}>
-        <PopularTvRender/>
+        <PopularTvRender />
       </Suspense>
       <div className='-mt-3'>
-          <Link href={`/list?type=tv&query=popular`}>
-            <div className='flex flex-row gap-1 items-center hover:scale-110 transition bg-yellow-400 rounded-md px-4 py-2'>
-              <p className=' text-dark text-[20px] font-semibold'>View More </p>
-              <FaChevronRight
-                color={'black'}
-                size={20}
-              />
-            </div>
-          </Link>
-        </div>
-        
+        <Link href={`/list?type=tv&query=popular`}>
+          <div className='flex flex-row gap-2 items-center hover:scale-110 transition'>
+            <p className=' text-white text-[20px] font-semibold'>View More </p>
+            <FaChevronDown
+              color={'#FACC15'}
+              size={20}
+            />
+          </div>
+        </Link>
+      </div>
+
       <Suspense fallback={<p>Loadiing</p>}>
-        <TopRatedTvRender/>
+        <TopRatedTvRender />
       </Suspense>
-        <div className='-mt-3'>
-          <Link href={`/list?type=tv&query=top_rated`}>
-            <div className='flex flex-row gap-1 items-center hover:scale-110 transition bg-yellow-400 rounded-md px-4 py-2'>
-              <p className=' text-dark text-[20px] font-semibold'>View More </p>
-              <FaChevronRight
-                color={'black'}
-                size={20}
-              />
-            </div>
-          </Link>
-        </div>
-      
-      <Modal/>
+      <div className='-mt-3'>
+        <Link href={`/list?type=tv&query=top_rated`}>
+          <div className='flex flex-row gap-2 items-center hover:scale-110 transition'>
+            <p className=' text-white text-[20px] font-semibold'>View More </p>
+            <FaChevronDown
+              color={'#FACC15'}
+              size={20}
+            />
+          </div>
+        </Link>
+      </div>
+
+      <Modal />
     </main>
   )
 }
@@ -88,35 +88,35 @@ export default function Home() {
 async function CarouselRender() {
   const trending = await trendingMovies()
   return (
-    <Carousel trending={trending}/>
+    <Carousel trending={trending} />
   )
 }
 
 async function PopularMovieRender() {
   const popularMovies = await getMovies('movie', 'popular', 1)
   return (
-    <MovieCarousel movies={popularMovies} title={'Popular Movies'} type={'movie'}/>
+    <MovieCarousel movies={popularMovies} title={'Popular Movies'} type={'movie'} />
   )
 }
 
 async function TopRatedMovieRender() {
   const topRatedMovies = await getMovies('movie', 'top_rated', 1)
   return (
-    <MovieCarousel movies={topRatedMovies} title={'Top Rated Movies'} type={'movie'}/>
+    <MovieCarousel movies={topRatedMovies} title={'Top Rated Movies'} type={'movie'} />
   )
 }
 
 async function PopularTvRender() {
   const popularTv = await getMovies('tv', 'popular', 1)
   return (
-    <MovieCarousel movies={popularTv}  title={'Popular TV Series'} type={'tv'}/>
+    <MovieCarousel movies={popularTv} title={'Popular TV Series'} type={'tv'} />
   )
 }
 
 async function TopRatedTvRender() {
   const topratedTv = await getMovies('movie', 'top_rated', 1)
   return (
-    <MovieCarousel movies={topratedTv}  title={'Top Rated TV Series'} type={'tv'}/>
+    <MovieCarousel movies={topratedTv} title={'Top Rated TV Series'} type={'tv'} />
   )
 }
 
