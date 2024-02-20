@@ -114,7 +114,7 @@ async function PopularTvRender() {
 }
 
 async function TopRatedTvRender() {
-  const topratedTv = await getMovies('movie', 'top_rated', 1)
+  const topratedTv = await getMovies('tv', 'top_rated', 1)
   return (
     <MovieCarousel movies={topratedTv} title={'Top Rated TV Series'} type={'tv'} />
   )
