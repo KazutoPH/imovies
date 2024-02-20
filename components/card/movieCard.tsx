@@ -34,14 +34,19 @@ function MovieCard({ movie, i, type, isDragging }: any) {
         whileHover={{}}
         className='group flex flex-col relative w-full sm:hover:scale-110 ease-in duration-200'>
         <div className='group flex items-end relative w-full aspect-[2/3] overflow-hidden  rounded-md border-[2px] bg-[#3b3b3b]  border-gray-800'>
-          <div className=" absolute h-full w-full ">
+          <div className="absolute h-full w-full flex items-center justify-center">
+            {movie.poster_path ? (
             <Image
-              src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
-              alt={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
-              fill
-              unoptimized
-              className='object-cover relative w-auto h-auto'
-            />
+            src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
+            alt={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
+            fill
+            unoptimized
+            className='object-cover relative w-auto h-auto'
+          />
+            ): 
+            <p className=' text-white text-lg md:text-3xl font-bold text-center'>{type === 'tv' ? movie.name : movie.title}</p>
+            }
+
             <div className=' absolute top-0 bottom-0 left-0 right-0 sm:group-hover:shadow-[inset_0px__-100px_100px_rgba(0,0,0,0.8)] box-border z-30 duration-300' />
           </div>
 
