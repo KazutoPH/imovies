@@ -114,7 +114,7 @@ function MovieCarousel({ movies, title, type }: any) {
     <div className='content-container overflow-hidden  z-50'>
 
       {title ? (
-        <h1 className='text-white text-3xl font-extrabold self-start'>{title}</h1>
+        <h1 className='text-white text-3xl font-extrabold self-start border-l-yellow-400 border-l-[5px] pl-5'>{title}</h1>
       ) : null}
 
       <div className="relative sm:overflow-x-clip py-2 sm:p-5">
