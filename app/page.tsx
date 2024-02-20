@@ -79,8 +79,6 @@ export default function Home() {
           </div>
         </Link>
       </div>
-
-      <Modal />
     </main>
   )
 }
