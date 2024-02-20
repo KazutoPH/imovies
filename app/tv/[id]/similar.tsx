@@ -8,7 +8,7 @@ async function Similar(id:any) {
   return (
     <>
     {similar.results.length && 
-        <div className='flex justify-center w-full'>
+        <div className='flex justify-center w-full mt-5'>
         <div className='max-w-7xl w-full'>
          <MovieCarousel movies={similar} title={'Similar TV Series'} type={'tv'}/>
         </div>
