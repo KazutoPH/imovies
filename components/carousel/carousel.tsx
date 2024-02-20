@@ -122,12 +122,12 @@ function Carousel({ trending }: any) {
 
               <div className='flex items-center z-20 md:mx-28 gap-16 justify-center'>
                 <div className='flex flex-col z-20 gap-2 w-[90%] md:w-[50%]'>
-                  <p className='text-5xl font-extrabold text-white'>{movie.original_title}</p>
+                  <p className='text-5xl font-extrabold text-white textShadow'>{movie.original_title}</p>
                   <div>
-                    <p className='text-3xl font-medium text-white'>{movie.release_date}</p>
+                    <p className='text-3xl font-medium text-white textShadow'>{movie.release_date}</p>
                   </div>
                   <div className=''>
-                    <p className='text-lg text-white leading-5 line-clamp-[10] sm:line-clamp-[14] '>{movie.overview}</p>
+                    <p className='text-lg text-white leading-5 line-clamp-[10] sm:line-clamp-[14] textShadow'>{movie.overview}</p>
                   </div>
 
 
