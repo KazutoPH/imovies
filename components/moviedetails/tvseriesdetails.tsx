@@ -28,7 +28,7 @@ function TVSeriesDetails({ movie }: any) {
 
         <div className='flex flex-col z-20 -mt-[500px] px-10 gap-10 self-center content-container'>
           <div className='flex gap-5 flex-col sm:flex-row'>
-            <div className='group flex self-center sm:self-start items-center justify-center relative h-full aspect-[24/36] w-[300px] overflow-hidden  rounded-md border-[2px]  border-gray-800 postershadow'>
+          <div className='group flex self-center md:self-start items-center justify-center relative h-full aspect-[24/36] w-[300px] overflow-hidden  rounded-md border-[2px] bg-[#3b3b3b]  border-gray-800 postershadow'>
               {movie.poster_path ? (
                 <div className=" h-full w-full flex justify-center items-center">
                   <Image
