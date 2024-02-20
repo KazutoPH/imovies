@@ -7,7 +7,7 @@ import Link from 'next/link'
 import SearchBar from './searchbar'
 import SearchResults from './searchResult'
 import { FaBars, FaBurger } from 'react-icons/fa6'
-import SideNav from '../sidenav'
+import SideNav from './sidenav'
 import { getGenres } from '@/lib/actions/movies.action'
 
 function Header() {
@@ -29,7 +29,6 @@ function Header() {
     async function getTvGenres() {
       const moviegenre = await getGenres('tv')
       setTvGenres(moviegenre)
-      console.log(moviegenres)
     }
 
     getMovieGenres()
@@ -49,6 +48,9 @@ function Header() {
     // remember current page location to use in the next move
     setLastScrollY(window.scrollY);
   };
+
+
+
   useEffect(() => {
     window.addEventListener('scroll', controlNavbar);
 
@@ -59,7 +61,7 @@ function Header() {
   }, [lastScrollY]);
 
   return (
-    <div className='relative z-[60]'>
+    <div className='relative z-40'>
       <AnimatePresence initial={false} >
         <motion.div
           variants={{
@@ -67,20 +69,39 @@ function Header() {
             hidden: { opacity: 0, height: 0, paddingTop: 0, paddingBottom: 0, overflow: 'hidden' }
           }}
           animate={show ? 'visible' : 'hidden'}
-          className={`fixed top-0 flex flex-col w-full items-center py-3 shadow-yellow-400 shadow-sm z-[50] bg-dark overflow-visible`}>
+          className={`fixed top-0 flex flex-col w-full items-center py-3 shadow-yellow-400 shadow-sm z-[50] bg-dark overflow-visible h-[60px] `}>
 
-          <nav className={`content-container flex flex-row gap-10 items-center`}>
-            <Link href='/' className={`${searchbarFocus ? 'hidden': 'flex'}`}>
-              <div className='rounded-md px-2 py-[2px] bg-yellow-400'>
-                <p className='font-extrabold text-2xl'>iMovies</p>
-              </div>
-            </Link>
+          <nav className={`content-container flex flex-row ${!searchbarFocus ? 'gap-5' : ''} md:gap-10 items-center`}>
+
+            <div className='md:hidden'>
+              <AnimatePresence initial={false}>
+                {!searchbarFocus &&
+                  <motion.div
+                    initial={{ width: 0, opacity: 0 }}
+                    animate={{ width: 'auto', opacity: 1 }}
+                    exit={{ width: 0, overflow: 'hidden', opacity: 0 }}
+                    transition={{ duration: 0.2, ease: 'easeInOut' }}>
+                    <Link href='/'>
+                      <div className='rounded-md px-2 bg-yellow-400'>
+                        <p className='font-extrabold text-2xl'>iMovies</p>
+                      </div>
+                    </Link>
+                  </motion.div>
+                }
+              </AnimatePresence>
+            </div>
+
+            <div className=' hidden md:flex'>
+              <Link href='/'>
+                <div className='rounded-md px-2 bg-yellow-400'>
+                  <p className='font-extrabold text-2xl'>iMovies</p>
+                </div>
+              </Link>
+            </div>
+
 
             <div className='w-full relative'>
               <div className='flex-row w-full'>
-                <div>
-
-                </div>
                 <SearchBar searchbarFocus={searchbarFocus} setSearchBarFocus={setSearchBarFocus} />
               </div>
               <SearchResults />
@@ -89,6 +110,7 @@ function Header() {
             <div className='md:flex flex-row gap-2 hidden relative overflow-visible'>
               {navList.map((nav, i) =>
                 <div
+                  key={i}
                   onMouseEnter={() => {
                     setSelectedHover(i)
                     setIsHover(true)
@@ -98,10 +120,10 @@ function Header() {
                   }}
                   onClick={() => setIsHover(false)}
                 >
-                  <Link href={`/list?type=${nav.type}&query=popular`} key={i}>
-                    <div 
-                    className='p-2 -my-2 hover:bg-grey ease-in transition rounded'>
-                      <p key={i} className='font-semibold text-xl text-white whitespace-nowrap'>{nav.name}</p>
+                  <Link href={`/list?type=${nav.type}&query=popular`}>
+                    <div
+                      className='p-2 -my-2 hover:bg-grey ease-in transition rounded'>
+                      <p className='font-semibold text-xl text-white whitespace-nowrap'>{nav.name}</p>
                     </div>
                   </Link>
 
@@ -116,7 +138,7 @@ function Header() {
                         {nav.category.map((category, x) =>
                           <Link href={`/list?type=${nav.type}&query=${category.filter}`} key={x}>
                             <div className='hover:bg-grey ease-in transition hover:cursor-pointer py-2 px-4'>
-                              <p key={x} className=' font-medium text-base text-white whitespace-nowrap'>{category.name}</p>
+                              <p className=' font-medium text-base text-white whitespace-nowrap'>{category.name}</p>
                             </div>
                           </Link>
 
@@ -125,10 +147,10 @@ function Header() {
                         {selectedHover === 0 ? (
                           <>
                             {moviegenres.map((data, x) =>
-                              <Link href={`/list?type=${nav.type}&genre=${data.name}&genreID=${data.id}`}>
+                              <Link href={`/list?type=${nav.type}&genre=${data.name}&genreID=${data.id}`} key={x}>
                                 <div
                                   className='hover:bg-grey ease-in transition hover:cursor-pointer py-2 px-4'>
-                                  <p key={x} className=' font-medium text-base text-white whitespace-nowrap'>{data.name}</p>
+                                  <p className=' font-medium text-base text-white whitespace-nowrap'>{data.name}</p>
                                 </div>
                               </Link>
                             )}
@@ -154,13 +176,23 @@ function Header() {
 
             </div>
 
-            <div
-              onClick={() => setSideNavPress(!sideNavPress)}
-              className='relative md:hidden hover:cursor-pointer'>
-              <FaBars
-                size={30}
-                color='white'
-              />
+            <div className='md:hidden'>
+              <AnimatePresence initial={false} >
+                {!searchbarFocus &&
+                  <motion.div
+                    initial={{ width: 0, opacity: 0 }}
+                    animate={{ width: 'auto', opacity: 1 }}
+                    exit={{ width: 0, overflow: 'hidden', opacity: 0 }}
+                    transition={{ duration: 0.2, ease: 'easeInOut' }}
+                    onClick={() => setSideNavPress(!sideNavPress)}
+                    className=' hover:cursor-pointer'>
+                    <FaBars
+                      size={30}
+                      color='white'
+                    />
+                  </motion.div>
+                }
+              </AnimatePresence>
             </div>
 
           </nav>

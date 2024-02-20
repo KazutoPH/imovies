@@ -1,7 +1,8 @@
 "use client"
 import React, { Dispatch, SetStateAction, useState } from 'react'
 import { useSearchParams, usePathname, useRouter } from 'next/navigation';
-import { FaMagnifyingGlass } from 'react-icons/fa6';
+import { FaMagnifyingGlass, FaX } from 'react-icons/fa6';
+import { AnimatePresence, motion } from "framer-motion"
 
 
 interface Props {
@@ -9,16 +10,17 @@ interface Props {
   setSearchBarFocus: Dispatch<SetStateAction<boolean>>;
 }
 
-function SearchBar({searchbarFocus, setSearchBarFocus}:Props) {
+function SearchBar({ searchbarFocus, setSearchBarFocus }: Props) {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
   const params = new URLSearchParams(searchParams);
   const [input, setInput] = useState<string>('')
-  const [searchText, setSearchText] = useState<any>()
+  const [searchText, setSearchText] = useState<any>('')
 
 
   function handleSearch(search: string) {
+    setSearchBarFocus(true)
     setSearchText(search)
     if (search) {
       params.set('search', search);
@@ -35,9 +37,10 @@ function SearchBar({searchbarFocus, setSearchBarFocus}:Props) {
 
   return (
     <div className='flex flex-row items-center bg-white w-full rounded-sm overflow-visible px-2'>
-      <input className=' outline-none p-1 flex-1 text-base text-black'
+      <input
+        className=' outline-none p-1 w-full text-base text-black'
         placeholder='Search...'
-        defaultValue={input}
+        value={input}
         onChange={(e) => {
           e.target.focus({ preventScroll: true })
           setInput(e.target.value)
@@ -46,9 +49,9 @@ function SearchBar({searchbarFocus, setSearchBarFocus}:Props) {
         onFocus={(e) => {
           e.target.focus({ preventScroll: true })
           handleSearch(e.target.value);
-         setSearchBarFocus(true)
+          setSearchBarFocus(true)
         }}
-        onClick={()=> setSearchBarFocus(true)}
+        onClick={() => setSearchBarFocus(true)}
         onBlur={(e) => {
           e.target.focus({ preventScroll: true })
           setSearchBarFocus(false)
@@ -56,6 +59,22 @@ function SearchBar({searchbarFocus, setSearchBarFocus}:Props) {
         }
         }
       />
+      <div className=' flex items-center gap-2'>
+        { input !== '' &&
+        <div
+        className='hover:cursor-pointer'
+        onClick={() => {
+          setInput('')
+          setSearchBarFocus(false)
+          removeSearch()
+        }}>
+        <FaX
+          color="grey"
+          size={20}
+        />
+      </div>
+        }
+
       <div
         className='hover:cursor-pointer'
         onClick={() => {
@@ -68,7 +87,7 @@ function SearchBar({searchbarFocus, setSearchBarFocus}:Props) {
           size={20}
         />
       </div>
-
+      </div>
     </div>
 
   )
