@@ -80,7 +80,7 @@ function Header() {
                     initial={{ width: 0, opacity: 0 }}
                     animate={{ width: 'auto', opacity: 1 }}
                     exit={{ width: 0, overflow: 'hidden', opacity: 0 }}
-                    transition={{ duration: 0.2, ease: 'easeInOut' }}>
+                    transition={{ duration: 0.4, ease: 'easeInOut' }}>
                     <Link href='/'>
                       <div className='rounded-md px-2 bg-yellow-400'>
                         <p className='font-extrabold text-2xl'>iMovies</p>

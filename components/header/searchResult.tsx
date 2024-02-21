@@ -41,7 +41,7 @@ function SearchResults() {
           <motion.div
             initial={{ height: 0 }}
             animate={{ height: "auto" }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.3 }}
             exit={{ height: 0 }}
 
             className='mt-2 flex flex-col max-h-[400px] w-full bg-darkgrey rounded absolute z-50 overflow-y-scroll'>
