@@ -1,14 +1,10 @@
 import Carousel from '@/components/carousel/carousel'
-import Image from 'next/image'
-import { carouselMovies } from '@/constants/constant'
-import Movies from '@/components/moviedetails/movies'
-import { getMovies, popularMovies, popularTvSeries, trendingMovies } from '@/lib/actions/movies.action'
-import Modal from '@/components/modal'
+import { getMovies, trendingMovies } from '@/lib/actions/movies.action'
 import MovieCarousel from '@/components/carousel/movieCarousel'
 import { Suspense } from 'react'
-import { CarouselSkeleton, MovieCarouselSkeleton, MovieDetailSkeleton } from '@/components/skeleton'
+import { CarouselSkeleton, MovieCarouselSkeleton } from '@/components/skeleton'
 import Link from 'next/link'
-import { FaChevronDown, FaChevronRight } from 'react-icons/fa6'
+import { FaChevronDown } from 'react-icons/fa6'
 import { homeCarouselList } from '@/constants/constant'
 
 export default function Home() {

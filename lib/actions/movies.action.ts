@@ -26,23 +26,6 @@ export async function getTrailer(id: any) {
   return trailer
 }
 
-export async function popularMovies() {
-  const movies = await
-    fetch(`${apihttp}/movie/popular?api_key=${process.env.THEMOVIESDB_API_KEY}&append_to_response=videos&language=en-US&page=1&`)
-      .then(res => res.json())
-      .then(json => { return json })
-
-  return movies
-}
-
-export async function popularTvSeries() {
-  const tv = await
-    fetch(`${apihttp}/tv/popular?api_key=${process.env.THEMOVIESDB_API_KEY}&append_to_response=videos&language=en-US&page=1&`)
-      .then(res => res.json())
-      .then(json => { return json })
-
-  return tv
-}
 
 export async function getMovieById(id: string) {
   const movie = await
@@ -118,21 +101,3 @@ export async function getSimilar(type: any, id: any, page: number) {
   return movie
 
 }
-
-// export async function getMovieCast(id:string){
-//   const movie = await
-//   fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.THEMOVIESDB_API_KEY}&append_to_response=credits`)
-//   .then(res =>  res.json())
-//   .then(json =>{ return json})
-
-//   return movie
-// }
-
-// export async function getCredits(id:string){
-//   const credit = await
-//   fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.THEMOVIESDB_API_KEY}&append_to_response=credits`)
-//   .then(res =>  res.json())
-//   .then(json =>{ return json})
-
-//   return credit
-// }
