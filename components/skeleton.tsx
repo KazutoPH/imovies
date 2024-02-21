@@ -59,23 +59,64 @@ export function MovieDetailSkeleton() {
 }
 
 export function CarouselSkeleton() {
-  return(
+  return (
     <div className='relative h-[600px] w-full leading-none'>
 
-<button
-          className='hidden sm:flex justify-center items-center w-14 absolute left-0 top-0 bottom-0 z-20 bg-dark/40 shadow-lg shadow-dark hover:scale-110 transition'>
-          <FaChevronLeft color='white' size={40} />
-        </button>
-        
-    <Skeleton baseColor='#3b3b3b' className='w-full h-full' />
-    <div className='carouselgradient' />
-    <button
-          className='hidden sm:flex justify-center items-center w-14 absolute right-0 top-0 bottom-0 z-20 bg-dark/40 shadow-lg shadow-dark hover:scale-110 transition'>
-          <FaChevronRight color='white' size={40} />
-        </button>
+      <button
+        className='hidden sm:flex justify-center items-center w-14 absolute left-0 top-0 bottom-0 z-20 bg-dark/40 shadow-lg shadow-dark hover:scale-110 transition'>
+        <FaChevronLeft color='white' size={40} />
+      </button>
 
-  </div>
+      <Skeleton baseColor='#3b3b3b' className='w-full h-full' />
+      <div className='carouselgradient' />
+      <button
+        className='hidden sm:flex justify-center items-center w-14 absolute right-0 top-0 bottom-0 z-20 bg-dark/40 shadow-lg shadow-dark hover:scale-110 transition'>
+        <FaChevronRight color='white' size={40} />
+      </button>
+
+    </div>
   )
+}
 
+export function MovieCarouselSkeleton() {
+
+  return (
+    <div className='content-container overflow-hidden  z-50'>
+      <div className="relative sm:overflow-x-clip py-2 sm:p-5">
+        <div className='flex flex-row w-full gap-2 z-[60] relative overflow-visible'>
+          <div className=" min-w-[130px] sm:min-w-[200px]">
+            <CardSKeleton />
+          </div>
+          <div className=" min-w-[130px] sm:min-w-[200px]">
+            <CardSKeleton />
+          </div>
+          <div className=" min-w-[130px] sm:min-w-[200px]">
+            <CardSKeleton />
+          </div>
+          <div className=" min-w-[130px] sm:min-w-[200px]">
+            <CardSKeleton />
+          </div>
+          <div className=" min-w-[130px] sm:min-w-[200px]">
+            <CardSKeleton />
+          </div>
+          <div className=" min-w-[130px] sm:min-w-[200px]">
+            <CardSKeleton />
+          </div>
+          <div className=" min-w-[130px] sm:min-w-[200px]">
+            <CardSKeleton />
+          </div>
+        </div>
+
+        <div className="hidden sm:flex absolute right-0 top-0 bottom-0 z-[70] overflow-hidden rounded-sm">
+          <button
+            className='flex justify-center items-center h-full w-14 left-0 top-0 bottom-0 bg-gradient-to-l from-dark to-transparent'>
+            <div>
+              <FaChevronRight color='white' size={40} />
+            </div>
+          </button>
+        </div>
+      </div>
+    </div>
+  )
 }
 
