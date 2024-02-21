@@ -5,6 +5,8 @@ import { FaChevronLeft, FaChevronRight, FaStar } from 'react-icons/fa6';
 import { useEffect, useRef, useState } from "react";
 import MovieCard from "../card/movieCard";
 
+let currentSlide:any
+
 function MovieCarousel({ movies, title, type }: any) {
   const controls = useDragControls()
   const [isDragging, setIsDragging] = useState(false)
@@ -15,7 +17,6 @@ function MovieCarousel({ movies, title, type }: any) {
   const ref = useRef<HTMLDivElement>(null)
   const dragControls = useDragControls();
   const animationControls = useAnimationControls();
-  const [currentSlide, setCurrentSlide] = useState(0)
 
 
   useEffect(() => {
@@ -56,7 +57,7 @@ function MovieCarousel({ movies, title, type }: any) {
           x: total,
           y: 0
         })
-        setCurrentSlide(total)
+        currentSlide = total
       } else {
         animationControls.start({ x: 0 })
       }
@@ -78,10 +79,10 @@ function MovieCarousel({ movies, title, type }: any) {
           x: total,
           y: 0
         })
-        setCurrentSlide(total)
+        currentSlide = total
       } else {
         animationControls.start({ x: -containerWidth })
-        setCurrentSlide(-containerWidth)
+        currentSlide = -containerWidth 
       }
     }
     setIsCLick(true)
@@ -104,7 +105,7 @@ function MovieCarousel({ movies, title, type }: any) {
       }
 
     if (!isClick)
-      setCurrentSlide(e.x)
+      currentSlide = e.x
 
     // console.log("Drag", e.x)
   }
