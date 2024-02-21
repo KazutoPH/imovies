@@ -6,12 +6,14 @@ import { getMovies, popularMovies, popularTvSeries, trendingMovies } from '@/lib
 import Modal from '@/components/modal'
 import MovieCarousel from '@/components/carousel/movieCarousel'
 import { Suspense } from 'react'
-import { CarouselSkeleton, MovieDetailSkeleton } from '@/components/skeleton'
+import { CarouselSkeleton, MovieCarouselSkeleton, MovieDetailSkeleton } from '@/components/skeleton'
 import Link from 'next/link'
 import { FaChevronDown, FaChevronRight } from 'react-icons/fa6'
+import { homeCarouselList } from '@/constants/constant'
 
 export default function Home() {
   //  console.log(tv)
+
 
   return (
     <main className="relative flex flex-col min-h-screen items-center w-full gap-4 z-30">
@@ -20,68 +22,29 @@ export default function Home() {
         <CarouselRender />
       </Suspense>
 
-      <Suspense fallback={<p>Loadiing</p>}>
-        <PopularMovieRender />
-      </Suspense>
-      <div className='-mt-3'>
-        <Link href={`/list?type=movie&query=popular`}>
-          <div className='flex flex-row gap-2 items-center hover:scale-110 transition'>
-            <p className=' text-white text-[20px] font-semibold'>View More </p>
-            <FaChevronDown
-              color={'#FACC15'}
-              size={20}
-            />
+      {homeCarouselList.map((data, i) =>
+        <div className='flex flex-col' key={i}>
+          <h1 className='text-white text-3xl font-extrabold self-start border-l-yellow-400 border-l-[5px] pl-5'>{data.name}</h1>
+          <Suspense fallback={<MovieCarouselSkeleton/>}>
+            <CarouselListRender name={data.name} type={data.type} query={data.query} page={1} />
+          </Suspense>
+          <div className='-mt-3 flex self-center'>
+            <Link href={`/list?type=movie&query=popular`}>
+              <div className='flex flex-row gap-2 items-center hover:scale-110 active:100 transition'>
+                <p className=' text-white text-[20px] font-semibold'>View More </p>
+                <FaChevronDown
+                  color={'#FACC15'}
+                  size={20}
+                />
+              </div>
+            </Link>
           </div>
-        </Link>
-      </div>
-
-      <Suspense fallback={<p>Loadiing</p>}>
-        <TopRatedMovieRender />
-      </Suspense>
-      <div className='-mt-3'>
-        <Link href={`/list?type=movie&query=top_rated`}>
-          <div className='flex flex-row gap-2 items-center hover:scale-110 transition'>
-            <p className=' text-white text-[20px] font-semibold'>View More </p>
-            <FaChevronDown
-              color={'#FACC15'}
-              size={20}
-            />
-          </div>
-        </Link>
-      </div>
-
-      <Suspense fallback={<p>Loadiing</p>}>
-        <PopularTvRender />
-      </Suspense>
-      <div className='-mt-3'>
-        <Link href={`/list?type=tv&query=popular`}>
-          <div className='flex flex-row gap-2 items-center hover:scale-110 transition'>
-            <p className=' text-white text-[20px] font-semibold'>View More </p>
-            <FaChevronDown
-              color={'#FACC15'}
-              size={20}
-            />
-          </div>
-        </Link>
-      </div>
-
-      <Suspense fallback={<p>Loadiing</p>}>
-        <TopRatedTvRender />
-      </Suspense>
-      <div className='-mt-3'>
-        <Link href={`/list?type=tv&query=top_rated`}>
-          <div className='flex flex-row gap-2 items-center hover:scale-110 transition'>
-            <p className=' text-white text-[20px] font-semibold'>View More </p>
-            <FaChevronDown
-              color={'#FACC15'}
-              size={20}
-            />
-          </div>
-        </Link>
-      </div>
+        </div>
+      )}
     </main>
   )
 }
+
 
 async function CarouselRender() {
   const trending = await trendingMovies()
@@ -90,31 +53,16 @@ async function CarouselRender() {
   )
 }
 
-async function PopularMovieRender() {
-  const popularMovies = await getMovies('movie', 'popular', 1)
+async function CarouselListRender({ name, type, query, page }: {
+  name: string,
+  type: string,
+  query: string,
+  page: number
+}) {
+  const movies = await getMovies(type, query, page)
   return (
-    <MovieCarousel movies={popularMovies} title={'Popular Movies'} type={'movie'} />
+    <MovieCarousel movies={movies} type={type} />
   )
 }
 
-async function TopRatedMovieRender() {
-  const topRatedMovies = await getMovies('movie', 'top_rated', 1)
-  return (
-    <MovieCarousel movies={topRatedMovies} title={'Top Rated Movies'} type={'movie'} />
-  )
-}
-
-async function PopularTvRender() {
-  const popularTv = await getMovies('tv', 'popular', 1)
-  return (
-    <MovieCarousel movies={popularTv} title={'Popular TV Series'} type={'tv'} />
-  )
-}
-
-async function TopRatedTvRender() {
-  const popularTv = await getMovies('tv','top_rated', 1)
-  return (
-    <MovieCarousel movies={popularTv} title={'Top Rated TV Series'} type={'tv'} />
-  )
-}
 

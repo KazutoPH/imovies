@@ -47,6 +47,29 @@ export const navList = [
   },
 ]
 
+export const homeCarouselList = [
+  {
+    name: 'Popular Movies',
+    type: 'movie',
+    query: 'popular'
+  },
+  {
+    name: 'Top Rated Movies',
+    type: 'movie',
+    query: 'top_rated'
+  },
+  {
+    name: 'Popular TV Series',
+    type: 'tv',
+    query: 'popular'
+  },
+  {
+    name: 'Top Rated TV Series',
+    type: 'tv',
+    query: 'top_rated'
+  },
+]
+
 export const selection = [
   {
     name: 'Popular',
