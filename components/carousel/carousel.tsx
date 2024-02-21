@@ -17,7 +17,7 @@ function Carousel({ trending }: any) {
   const carouselRef = useRef<HTMLDivElement>(null)
 
   const [dragging, setDragging] = useState(false)
-  const dragBuffer = 50
+  const dragBuffer = 25
   const dragX = useMotionValue(0)
 
 
@@ -133,12 +133,12 @@ function Carousel({ trending }: any) {
 
                   <div className='flex gap-5 mt-2 items-center flex-wrap justify-center min-w-[414px]:justify-start'>
                     <Link href={`/movie/${movie.id}`}>
-                      <button className='btn whitespace-nowrap hover:scale-110 transition'>
+                      <button className='btn whitespace-nowrap hover:scale-110 active:scale-100 transition'>
                         Watch Now
                       </button>
                     </Link>
 
-                    <button className='btn2 whitespace-nowrap hover:scale-110 transition'
+                    <button className='btn2 whitespace-nowrap hover:scale-110 active:scale-100 transition'
                       onClick={() => router.push(`${pathname}?trailer=${movie.id}`)}>
                       Watch Trailer
                     </button>

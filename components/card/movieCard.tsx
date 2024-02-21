@@ -31,8 +31,7 @@ function MovieCard({ movie, i, type, isDragging }: any) {
       key={i}>
 
       <motion.div
-        whileHover={{}}
-        className='group flex flex-col relative w-full sm:hover:scale-110 ease-in duration-200'>
+        className='group flex flex-col relative w-full hover:scale-110 active:scale-100 ease-in duration-200'>
         <div className='group flex items-end relative w-full aspect-[2/3] overflow-hidden  rounded-md border-[2px] bg-[#3b3b3b]  border-gray-800'>
           <div className="absolute h-full w-full flex items-center justify-center">
             {movie.poster_path ? (

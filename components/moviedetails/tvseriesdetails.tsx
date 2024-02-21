@@ -67,8 +67,8 @@ function TVSeriesDetails({ movie }: any) {
 
                 {movie.genres?.map((genre: any, i: any) =>
                   <Link href={`/list?type=tv&genre=${genre.name}&genreID=${genre.id}`} key={i}>
-                    <div className='py-1 px-4 border-2 border-white rounded-full' key={i}>
-                      <p className='text-base  text-white textShadow'>{genre.name}</p>
+                    <div className='py-1 px-4 border-2 border-white rounded-full hover:bg-yellow-400 hover:text-dark hover:scale-110 active:scale-100 transition' key={i}>
+                      <p className='text-base textShadow  text-white'>{genre.name}</p>
                     </div>
                   </Link>
                 )}
@@ -104,7 +104,7 @@ function TVSeriesDetails({ movie }: any) {
                         )}
                       </div>
 
-                      <p className='text-base  text-white textShadow'>{cast.name}</p>
+                      <p className='text-base  text-white textShadow mt-1'>{cast.name}</p>
                     </div>
                   )}
                 </div>
