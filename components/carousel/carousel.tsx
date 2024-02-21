@@ -25,7 +25,7 @@ function Carousel({ trending }: any) {
 
     if(!dragging) {
       if (!buttonPress)
-      var timer = setTimeout(() => setCurrentSlide((currentSlide) => (currentSlide === trending.length - 1 ? 0 : currentSlide + 1)), 5000)
+      var timer = setTimeout(() => setCurrentSlide((currentSlide) => (currentSlide === trending.length - 1 ? 0 : currentSlide + 1)), 10000)
 
     if (buttonPress)
       var timer = setTimeout(() => setCurrentSlide((currentSlide) => (currentSlide === trending.length - 1 ? 0 : currentSlide + 1)), 15000)
