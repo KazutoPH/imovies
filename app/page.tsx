@@ -25,7 +25,7 @@ export default function Home() {
             <CarouselListRender name={data.name} type={data.type} query={data.query} page={1} />
           </Suspense>
           <div className='-mt-3 flex self-center'>
-            <Link href={`/list?type=movie&query=popular`}>
+            <Link href={`/list?type=${data.type}&query=${data.query}`}>
               <div className='flex flex-row gap-2 items-center hover:scale-110 active:100 transition'>
                 <p className=' text-white text-[20px] font-semibold'>View More </p>
                 <FaChevronDown
