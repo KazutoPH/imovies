@@ -12,13 +12,13 @@ function Title() {
   console.log(genre)
 
   useEffect(() => {
-    if(genre)
-    setPreTitle(genre.replace(/'+'/g, '&'))
+    if (genre)
+      setPreTitle(genre.replace(/and/g, '&'))
 
     else if (query)
-    setPreTitle(query.replace(/_/g, ' '))
+      setPreTitle(query.replace(/_/g, ' '))
 
-  },[[query, movietype, genre]])
+  }, [[query, movietype, genre]])
 
   return (
     <div>
