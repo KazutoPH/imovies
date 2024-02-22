@@ -158,7 +158,7 @@ function Header() {
                         ) :
                           <>
                             {tvgenres.map((data, x) =>
-                              <Link href={`/list?type=${nav.type}&genre=${data.name.replace(/&/g, '+')}&genreID=${data.id}`} key={x}>
+                              <Link href={`/list?type=${nav.type}&genre=${data.name.replace(/&/g, 'and')}&genreID=${data.id}`} key={x}>
                                 <div
                                   className='hover:bg-grey ease-in transition hover:cursor-pointer py-2 px-4' >
                                   <p className=' font-medium text-base text-white whitespace-nowrap'>{data.name}</p>
