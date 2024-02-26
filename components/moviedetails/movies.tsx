@@ -10,6 +10,7 @@ import MovieCard from "../card/movieCard";
 import { useSearchParams } from "next/navigation";
 import { getByGenre, getMovies } from "@/lib/actions/movies.action";
 import { CardSKeleton, LoadingCircle, MovieListSkeleton } from "../skeleton";
+import ErrorButton from "../button/ErrorButton";
 
 let page = 1
 
@@ -26,23 +27,20 @@ function Movies() {
   let pArray = new Array(12).fill(null).map((data, i) => <CardSKeleton key={i} />)
 
   useEffect(() => {
-    setResult([])
-
-      initialFetchData()
-
+    initialFetchData()
   }, [query, type, genre])
 
   const initialFetchData = async () => {
-    
-    let newRresult:any;
+    setResult([])
+    let newRresult: any;
 
-    if(query)
-    newRresult = await getMovies(type, query, page);
+    if (query)
+      newRresult = await getMovies(type, query, page);
 
     else
-    newRresult = await getByGenre(type, genre, page);
-  
-    console.log(result)
+      newRresult = await getByGenre(type, genre, page);
+
+    // console.log(result)
 
     if (newRresult.results) {
       setResult((oldData: any) => [...oldData, newRresult])
@@ -64,22 +62,22 @@ function Movies() {
   useEffect(() => {
     const fetchData = async (page: number) => {
 
-      let Newresult:any;
+      let Newresult: any;
 
-      if(query)
-      Newresult = await getMovies(type, query, page);
-  
+      if (query)
+        Newresult = await getMovies(type, query, page);
+
       else
-      Newresult = await getByGenre(type, genre, page);
-    
+        Newresult = await getByGenre(type, genre, page);
+
       if (Newresult.results)
         setResult((oldData: any) => [...oldData, Newresult])
       // setResult(await result);
 
-      console.log(result)
+      // console.log(result)
     };
 
-    if (result.length - 1 >= 0  && isInView) {
+    if (result.length - 1 >= 0 && isInView) {
       page++
       fetchData(page)
     }
@@ -88,7 +86,7 @@ function Movies() {
 
   // console.log(movies)
   return (
-    <div className='flex flex-col py-5 gap-10'>
+    <div className='flex flex-1 flex-col py-5 gap-10 w-full'>
       <div className='relative gridcontainer w-full z-30'>
 
         {result.length - 1 >= 0 ? (
@@ -109,17 +107,23 @@ function Movies() {
           )
         }
 
-        {error &&
-          <p className=" text-white">There was an error Loading files</p>
-        }
       </div>
+
+      {error &&
+        <div className='flex flex-col items-center gap-3 self-center'>
+          <p className='text-white text-base'>There was an error fetching data</p>
+          <div onClick={() => initialFetchData()}>
+            <ErrorButton />
+          </div>
+
+        </div>
+      }
 
       {!error &&
         <div ref={ref} className="flex self-center">
           <LoadingCircle />
         </div>
       }
-
 
     </div>
   )
