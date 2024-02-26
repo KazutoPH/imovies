@@ -18,13 +18,14 @@ export default function Home() {
         <CarouselRender />
       </Suspense>
 
+      <div className='content-container overflow-visible flex flex-col gap-5'>
       {homeCarouselList.map((data, i) =>
-        <div className='flex flex-col' key={i}>
+          <div className='flex flex-col' key={i}>
           <h1 className='text-white text-3xl font-extrabold self-start border-l-yellow-400 border-l-[5px] pl-5'>{data.name}</h1>
           <Suspense fallback={<MovieCarouselSkeleton/>}>
             <CarouselListRender name={data.name} type={data.type} query={data.query} page={1} />
           </Suspense>
-          <div className='-mt-3 flex self-center'>
+          <div className='mt-1 flex self-center'>
             <Link href={`/list?type=${data.type}&query=${data.query}`}>
               <div className='flex flex-row gap-2 items-center hover:scale-110 active:100 transition'>
                 <p className=' text-white text-[20px] font-semibold'>View More </p>
@@ -35,8 +36,9 @@ export default function Home() {
               </div>
             </Link>
           </div>
-        </div>
+          </div>
       )}
+              </div>
     </main>
   )
 }
