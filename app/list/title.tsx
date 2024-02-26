@@ -9,7 +9,7 @@ function Title() {
   let genre = params.get('genre')
   const [preTitle, setPreTitle] = useState('')
 
-  console.log(genre)
+  // console.log(genre)
 
   useEffect(() => {
     if (genre)
