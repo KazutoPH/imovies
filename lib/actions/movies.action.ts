@@ -1,5 +1,7 @@
 "use server"
 
+import { error } from "console"
+
 const apihttp = 'https://api.themoviedb.org/3'
 
 export async function trendingMovies() {
@@ -16,16 +18,19 @@ export async function getTrailer(id: any) {
     fetch(`${apihttp}/movie/${id}/videos?api_key=${process.env.THEMOVIESDB_API_KEY}&language=en-US`)
       .then(res => res.json())
       .then(json => {
+        if (json.results){
         let result = json.results
         let filter = result.filter((data: any) => data.name.includes('Official Trailer'))
         return filter[0].key
-
+        }
+        else {
+          return 'error'
+        }
         // return json
       })
 
   return trailer
 }
-
 
 export async function getMovieById(id: string) {
   const movie = await
