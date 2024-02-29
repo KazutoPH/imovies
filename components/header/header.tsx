@@ -9,6 +9,7 @@ import SearchResults from './searchResult'
 import { FaBars, FaBurger } from 'react-icons/fa6'
 import SideNav from './sidenav'
 import { getGenres } from '@/lib/actions/movies.action'
+import { useSearchParams } from 'next/navigation'
 
 function Header() {
   const [show, setShow] = useState(true);
@@ -19,6 +20,8 @@ function Header() {
   const [moviegenres, setMovieGenres] = useState<any[]>([])
   const [tvgenres, setTvGenres] = useState<any[]>([])
   const [searchbarFocus, setSearchBarFocus] = useState(false)
+  const searchParams = useSearchParams()
+  const search = searchParams.get('search')
 
   useEffect(() => {
     async function getMovieGenres() {
@@ -65,17 +68,18 @@ function Header() {
       <AnimatePresence initial={false} >
         <motion.div
           variants={{
-            visible: { opacity: 1, display: 'flex' },
-            hidden: { opacity: 0, height: 0, paddingTop: 0, paddingBottom: 0, overflow: 'hidden' }
+            visible: { y: 0, opacity: 1, overflow: 'visible' },
+            hidden: { y: '-100%', opacity: 0, overflow: 'hidden' }
           }}
           animate={show ? 'visible' : 'hidden'}
+          transition={{ ease: 'easeInOut', type: 'keyframes' }}
           className={`fixed top-0 flex flex-col w-full items-center py-3 shadow-yellow-400 shadow-sm z-[50] bg-dark overflow-visible h-[60px] `}>
 
-          <nav className={`content-container flex flex-row ${!searchbarFocus ? 'gap-5' : ''} md:gap-10 items-center`}>
+          <nav className={`content-container flex flex-row ${!search ? 'gap-5' : ''} md:gap-10 items-center`}>
 
             <div className='md:hidden'>
               <AnimatePresence initial={false}>
-                {!searchbarFocus &&
+                {!search &&
                   <motion.div
                     initial={{ width: 0, opacity: 0 }}
                     animate={{ width: 'auto', opacity: 1 }}
@@ -178,7 +182,7 @@ function Header() {
 
             <div className='md:hidden'>
               <AnimatePresence initial={false} >
-                {!searchbarFocus &&
+                {!search &&
                   <motion.div
                     initial={{ width: 0, opacity: 0 }}
                     animate={{ width: 'auto', opacity: 1 }}
