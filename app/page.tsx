@@ -18,7 +18,7 @@ export default function Home() {
         <CarouselRender />
       </Suspense>
 
-      <div className='flex-col gap-5'>
+      <div className='flex flex-col gap-5 w-full max-w-7xl'>
       {homeCarouselList.map((data, i) =>
           <div className='flex flex-col' key={i}>
           <Suspense fallback={<MovieCarouselSkeleton/>}>
@@ -26,7 +26,7 @@ export default function Home() {
           </Suspense>
           </div>
       )}
-              </div>
+       </div>
     </main>
   )
 }

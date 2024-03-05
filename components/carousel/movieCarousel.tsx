@@ -15,7 +15,7 @@ function MovieCarousel({ movies, title, type }: any) {
   const ref = useRef<HTMLDivElement>(null)
   const dragControls = useDragControls();
   const animationControls = useAnimationControls();
-  const [currentSlide, setCurrentSlide] = useState(0)
+  let currentSlide = 0
 
 
   useEffect(() => {
@@ -56,7 +56,7 @@ function MovieCarousel({ movies, title, type }: any) {
           x: total,
           y: 0
         })
-        setCurrentSlide(total)
+        currentSlide = total
       } else {
         animationControls.start({ x: 0 })
       }
@@ -78,10 +78,10 @@ function MovieCarousel({ movies, title, type }: any) {
           x: total,
           y: 0
         })
-        setCurrentSlide(total)
+        currentSlide = total
       } else {
         animationControls.start({ x: -containerWidth })
-        setCurrentSlide(-containerWidth)
+        currentSlide = (-containerWidth)
       }
     }
     setIsCLick(true)
@@ -104,7 +104,7 @@ function MovieCarousel({ movies, title, type }: any) {
       }
 
     if (!isClick)
-      setCurrentSlide(e.x)
+      currentSlide = e.x
 
     // console.log("Drag", e.x)
   }
@@ -156,7 +156,7 @@ function MovieCarousel({ movies, title, type }: any) {
           }}
           onUpdate={(e: any) => DRAGGING(e)}
 
-          className='flex flex-row w-full gap-2 z-[60] relative overflow-visible'>
+          className='flex flex-row w-full gap-2 z-[60] relative'>
           {movies && movies?.results?.map((movie: any, i: any) =>
             <div className=" min-w-[130px] sm:min-w-[200px]" key={i}>
               <MovieCard movie={movie} i={i} type={type} isDragging={isDragging} />
