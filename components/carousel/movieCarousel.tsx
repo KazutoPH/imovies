@@ -15,7 +15,7 @@ function MovieCarousel({ movies, title, type }: any) {
   const ref = useRef<HTMLDivElement>(null)
   const dragControls = useDragControls();
   const animationControls = useAnimationControls();
-  let currentSlide = 0
+  const [currentSlide, setCurrentSlide] = useState(0)
 
 
   useEffect(() => {
@@ -56,7 +56,7 @@ function MovieCarousel({ movies, title, type }: any) {
           x: total,
           y: 0
         })
-        currentSlide = total
+        setCurrentSlide(total)
       } else {
         animationControls.start({ x: 0 })
       }
@@ -78,10 +78,10 @@ function MovieCarousel({ movies, title, type }: any) {
           x: total,
           y: 0
         })
-        currentSlide = total
+        setCurrentSlide(total)
       } else {
         animationControls.start({ x: -containerWidth })
-        currentSlide = (-containerWidth)
+        setCurrentSlide(-containerWidth)
       }
     }
     setIsCLick(true)
@@ -104,7 +104,7 @@ function MovieCarousel({ movies, title, type }: any) {
       }
 
     if (!isClick)
-      currentSlide = e.x
+      setCurrentSlide(e.x)
 
     // console.log("Drag", e.x)
   }
