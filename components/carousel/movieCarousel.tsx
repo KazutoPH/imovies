@@ -156,7 +156,7 @@ function MovieCarousel({ movies, title, type }: any) {
           }}
           onUpdate={(e: any) => DRAGGING(e)}
 
-          className='flex flex-row w-full gap-2 z-[60] relative overflow-visible'>
+          className='flex flex-row w-full gap-2 z-[60] relative'>
           {movies && movies?.results?.map((movie: any, i: any) =>
             <div className=" min-w-[130px] sm:min-w-[200px]" key={i}>
               <MovieCard movie={movie} i={i} type={type} isDragging={isDragging} />
