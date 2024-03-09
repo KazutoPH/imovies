@@ -1,12 +1,9 @@
 "use client"
 
 import React from 'react'
-import { carouselMovies } from "@/constants/constant"
 import Image from "next/image"
 import { motion } from 'framer-motion';
 import { FaStar } from 'react-icons/fa6';
-import { useEffect } from "react";
-import Link from "next/link";
 import { useRouter } from 'next/navigation';
 
 function MovieCard({ movie, i, type, isDragging }: any) {

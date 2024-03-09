@@ -2,8 +2,6 @@
 import React, { Dispatch, SetStateAction, useState } from 'react'
 import { useSearchParams, usePathname, useRouter } from 'next/navigation';
 import { FaMagnifyingGlass, FaX } from 'react-icons/fa6';
-import { AnimatePresence, motion } from "framer-motion"
-
 
 interface Props {
   searchbarFocus: boolean,

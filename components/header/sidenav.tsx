@@ -1,7 +1,7 @@
 import { navList } from '@/constants/constant';
 import { AnimatePresence, motion } from 'framer-motion';
 import Link from 'next/link'
-import React, { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react'
+import React, { Dispatch, SetStateAction, useRef, useState } from 'react'
 import { FaX } from 'react-icons/fa6'
 import { FaChevronDown } from 'react-icons/fa6';
 

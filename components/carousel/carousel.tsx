@@ -1,5 +1,4 @@
 "use client"
-import { carouselMovies } from '@/constants/constant'
 import Image from 'next/image'
 import React, { useEffect, useState, useRef } from 'react'
 import { FaChevronLeft } from "react-icons/fa6";

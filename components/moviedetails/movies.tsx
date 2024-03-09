@@ -1,11 +1,7 @@
 "use client"
 
-import { carouselMovies } from "@/constants/constant"
-import Image from "next/image"
 import { motion, useInView } from 'framer-motion';
-import { FaStar } from 'react-icons/fa6';
 import { useEffect, useRef, useState } from "react";
-import Link from "next/link";
 import MovieCard from "../card/movieCard";
 import { useSearchParams } from "next/navigation";
 import { getByGenre, getMovies } from "@/lib/actions/movies.action";

@@ -3,8 +3,6 @@ import { getMovies, trendingMovies } from '@/lib/actions/movies.action'
 import MovieCarousel from '@/components/carousel/movieCarousel'
 import { Suspense } from 'react'
 import { CarouselSkeleton, MovieCarouselSkeleton } from '@/components/skeleton'
-import Link from 'next/link'
-import { FaChevronDown } from 'react-icons/fa6'
 import { homeCarouselList } from '@/constants/constant'
 
 export default function Home() {

@@ -79,23 +79,23 @@ function Modal() {
               {trailer ?
                 (
                   <>
-                  {trailer === 'error' ? (
-                    <div className='flex flex-col items-center gap-3'>
-                      <p className='text-white text-base'>There was an error fetching data</p>
-                      <div onClick={()=> fetchData()}>
-                        <ErrorButton/>
-                      </div>
+                    {trailer === 'error' ? (
+                      <div className='flex flex-col items-center gap-3'>
+                        <p className='text-white text-base'>There was an error fetching data</p>
+                        <div onClick={() => fetchData()}>
+                          <ErrorButton />
+                        </div>
 
-                    </div>
-                  ):(
-                    <iframe className='w-full aspect-video' src={`https://www.youtube.com/embed/${trailer}?&autoplay=1`} title="Movie Trailer" allow="autoplay; picture-in-picture;" allowFullScreen></iframe>
-                  )}
+                      </div>
+                    ) : (
+                      <iframe className='w-full aspect-video' src={`https://www.youtube.com/embed/${trailer}?&autoplay=1`} title="Movie Trailer" allow="autoplay; picture-in-picture;" allowFullScreen></iframe>
+                    )}
                   </>
 
                 ) : (
                   <div className='relative'>
-                  <div className='videoloader' />
-                </div>
+                    <div className='videoloader' />
+                  </div>
                 )
               }
             </div>
