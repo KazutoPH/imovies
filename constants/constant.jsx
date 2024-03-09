@@ -86,6 +86,93 @@ export const selection = [
 
 ]
 
+export const footerLinks = [
+  {
+    title: 'TV Shows',
+    links: [
+      {
+        name: 'Airing Today',
+        links: '/list?type=tv&query=airing_today'
+      },
+      {
+        name: 'Drama',
+        links: '/list?type=tv&genre=Drama&genreID=18'
+      },
+      {
+        name: 'Documentary',
+        links: '/list?type=tv&genre=Documentary&genreID=99'
+      },
+      {
+        name: 'Family',
+        links: '/list?type=tv&genre=Family&genreID=10751'
+      },
+      {
+        name: 'Reality',
+        links: '/list?type=tv&genre=Reality&genreID=10764'
+      }
+    ]
+  },
+  {
+    title: 'Movies',
+    links: [
+      {
+        name: 'Action',
+        links: '/list?type=movie&genre=Action&genreID=28'
+      },
+      {
+        name: 'Adventure',
+        links: '/list?type=movie&genre=Adventure&genreID=12'
+      },
+      {
+        name: 'Horror',
+        links: '/list?type=movie&genre=Horror&genreID=27'
+      },
+      {
+        name: 'Romance',
+        links: '/list?type=movie&genre=Romance&genreID=10749'
+      },
+      {
+        name: 'Science Fiction',
+        links: '/list?type=movie&genre=Science%20Fiction&genreID=878'
+      }
+    ]
+  },
+  {
+    title: 'About',
+    links: [
+      {
+        name: 'How it works',
+        links: ''
+      },
+      {
+        name: 'Privacy & Policy',
+        links: ''
+      },
+      {
+        name: 'Contact Us',
+        links: ''
+      },
+    ]
+  },
+  {
+    title: 'Socials',
+    links: [
+      {
+        name: 'Facebook',
+        links: ''
+      },
+      {
+        name: 'Instagram',
+        links: ''
+      },
+      {
+        name: 'Twitter',
+        links: ''
+      },
+    ]
+  }
+]
+
 export const carouselMovies = [
   {
     name: 'Avangers',
