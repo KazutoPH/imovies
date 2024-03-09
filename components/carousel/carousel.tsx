@@ -138,7 +138,7 @@ function Carousel({ trending }: any) {
                     </Link>
 
                     <button className='btn2 whitespace-nowrap hover:scale-110 active:scale-100 transition'
-                      onClick={() => router.push(`${pathname}?trailer=${movie.id}`)}>
+                      onClick={() => router.push(`${pathname}?trailer=${movie.id}`, { scroll: false })}>
                       Watch Trailer
                     </button>
                   </div>

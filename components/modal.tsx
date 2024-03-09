@@ -22,9 +22,12 @@ function Modal() {
 
   useEffect(() => {
     if (search) {
-      setShow(true)
+      setShow(true),
+      (document.getElementById('maincontainer') as HTMLFormElement).style.overflow="hidden"
       fetchData()
     }
+    else
+    (document.getElementById('maincontainer') as HTMLFormElement).style.overflow="auto"
   }, [search])
 
   const fetchData = async () => {
@@ -66,7 +69,7 @@ function Modal() {
           <div className=' h-auto w-[95%] aspect-video sm:w-4/5 p-2 bg-dark flex flex-col gap-1 relative z-[100]'>
             <div className='flex self-end hover:scale-110 active:scale-100 hover:cursor-pointer transition'
               onClick={() => {
-                router.push(`${pathname}`)
+                router.push(`${pathname}`,{scroll: false})
                 setShow(false)
                 setTrailer(undefined)
               }}>
