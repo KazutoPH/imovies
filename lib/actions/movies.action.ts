@@ -21,7 +21,6 @@ export async function getTrailer(id: any) {
         if (json.results){
         let result = json.results
         let filter = result.filter((data: any) => data.name.includes('Official Trailer') || data.type.includes('Trailer') )
-        console.log(filter)
         return filter[0].key
         }
         else {
