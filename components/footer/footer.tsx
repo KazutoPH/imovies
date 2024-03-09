@@ -5,9 +5,9 @@ import React from 'react'
 function Footer() {
   return (
     <div className='w-full'>
-      <div className='content-container mx-auto flex flex-row gap-10 justify-evenly py-10 flex-wrap'>
+      <div className='content-container mx-auto flex flex-1 flex-row gap-10 justify-evenly py-10 flex-wrap'>
         {footerLinks.map((data, i) => 
-          <div className='flex flex-col gap-3' key={i}>
+          <div className='flex flex-col gap-3 min-w-[120px]' key={i}>
             <h1 className='text-lg font-bold text-white'>
               {data.title}
               </h1>
