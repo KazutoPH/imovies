@@ -88,31 +88,6 @@ export const selection = [
 
 export const footerLinks = [
   {
-    title: 'TV Shows',
-    links: [
-      {
-        name: 'Airing Today',
-        links: '/list?type=tv&query=airing_today'
-      },
-      {
-        name: 'Drama',
-        links: '/list?type=tv&genre=Drama&genreID=18'
-      },
-      {
-        name: 'Documentary',
-        links: '/list?type=tv&genre=Documentary&genreID=99'
-      },
-      {
-        name: 'Family',
-        links: '/list?type=tv&genre=Family&genreID=10751'
-      },
-      {
-        name: 'Reality',
-        links: '/list?type=tv&genre=Reality&genreID=10764'
-      }
-    ]
-  },
-  {
     title: 'Movies',
     links: [
       {
@@ -134,6 +109,31 @@ export const footerLinks = [
       {
         name: 'Science Fiction',
         links: '/list?type=movie&genre=Science%20Fiction&genreID=878'
+      }
+    ]
+  },
+  {
+    title: 'TV Shows',
+    links: [
+      {
+        name: 'Airing Today',
+        links: '/list?type=tv&query=airing_today'
+      },
+      {
+        name: 'Drama',
+        links: '/list?type=tv&genre=Drama&genreID=18'
+      },
+      {
+        name: 'Documentary',
+        links: '/list?type=tv&genre=Documentary&genreID=99'
+      },
+      {
+        name: 'Family',
+        links: '/list?type=tv&genre=Family&genreID=10751'
+      },
+      {
+        name: 'Reality',
+        links: '/list?type=tv&genre=Reality&genreID=10764'
       }
     ]
   },
