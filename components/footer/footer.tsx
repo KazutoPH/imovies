@@ -26,7 +26,7 @@ function Footer() {
         )}
       </div>
     <div className='w-full flex items-center justify-center bg-yellow-400 py-1'>
-      <p className='text-base font-medium text-dark'>iMovies 2024 || All Rights Reserve</p>
+      <p className='text-[14px] font-medium text-dark'>iMovies 2024 || All rights reserve</p>
     </div>
     </div>
 
