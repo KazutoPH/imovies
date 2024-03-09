@@ -137,7 +137,8 @@ function Header() {
                       animate={{ height: "auto" }}
                       transition={{ duration: 0.5, ease: 'easeInOut' }}
                       exit={{ height: 0 }}
-                      className='w-max flex-col bg-darkgrey absolute right-0 rounded py-2 px-1 mt-[10px] overflow-hidden'>
+                      className='w-max flex-col absolute right-0 rounded overflow-hidden'>
+                        <div className=' bg-darkgrey w-full py-2 px-1 mt-4'>
                       <div className='grid grid-cols-3'>
                         {nav.category.map((category, x) =>
                           <Link href={`/list?type=${nav.type}&query=${category.filter}`} key={x}>
@@ -172,6 +173,7 @@ function Header() {
                           </>
                         }
 
+                      </div>
                       </div>
                     </motion.div>
                   }
