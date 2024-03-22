@@ -9,7 +9,7 @@ const options = {
   method: "GET",
   headers: {
     accept: "application/json",
-    Authorization: ` ${process.env.THEMOVIESDB_ACESS_TOKEN}`,
+    Authorization: `${process.env.THEMOVIESDB_ACESS_TOKEN}`,
   },
 };
 
@@ -102,18 +102,6 @@ export async function getMovies(
   });
 
   return movie;
-}
-
-export async function getGenres(type: string) {
-  const apiURL = `https://api.themoviedb.org/3/genre/${type}/list?&api_key=${process.env.THEMOVIESDB_API_KEY}`;
-
-  const genre = await fetch(apiURL, options)
-    .then((res) => res.json())
-    .then((json) => {
-      return json.genres;
-    });
-
-  return genre;
 }
 
 export async function getByGenre(
