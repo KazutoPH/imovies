@@ -1,108 +1,145 @@
-"use server"
+"use server";
 
-import { error } from "console"
+import { NextResponse } from "next/server";
 
-const apihttp = 'https://api.themoviedb.org/3'
+const apihttp = "https://api.themoviedb.org/3";
+const apikey = `api_key=${process.env.THEMOVIESDB_API_KEY}`;
+const language = "language=en-US";
+const options = {
+  method: "GET",
+  headers: {
+    accept: "application/json",
+    Authorization: ` ${process.env.THEMOVIESDB_ACESS_TOKEN}`,
+  },
+};
 
 export async function trendingMovies() {
-  const trending = await
-    fetch(`${apihttp}/trending/movie/day?api_key=${process.env.THEMOVIESDB_API_KEY}&append_to_response=videos&language=en-US`)
-      .then(res => res.json())
-      .then(json => { return json.results.slice(0, 10) })
+  const apiURL = `${apihttp}/trending/movie/day?${apikey}&append_to_response=videos&${language}`;
 
-  return trending
+  const trending = await fetch(apiURL, options).then((res) => {
+    if (res.status === 200) return res.json();
+    else
+      return NextResponse.json({ error: "there was an error fetching data" });
+  });
+
+  if (trending.results) {
+    return trending.results.slice(0, 10);
+  }
+
+  return trending;
 }
 
 export async function getTrailer(id: any) {
-  const trailer = await
-    fetch(`${apihttp}/movie/${id}/videos?api_key=${process.env.THEMOVIESDB_API_KEY}&language=en-US`)
-      .then(res => res.json())
-      .then(json => {
-        if (json.results){
-        let result = json.results
-        let filter = result.filter((data: any) => data.name.includes('Official Trailer') || data.type.includes('Trailer') )
-        return filter[0].key
-        }
-        else {
-          return 'error'
-        }
-        // return json
-      })
+  const apiURL = `${apihttp}/movie/${id}/videos?${apikey}&${language}`;
 
-  return trailer
+  const trailer = await fetch(apiURL, options).then((res) => {
+    if (res.status === 200) return res.json();
+    else
+      return NextResponse.json({ error: "there was an error fetching data" });
+  });
+
+  if (trailer.results) {
+    let result = trailer.results;
+    let filter = result.filter(
+      (data: any) =>
+        data.name.includes("Official Trailer") || data.type.includes("Trailer")
+    );
+    return filter[0].key;
+  }
+
+  return trailer;
 }
 
 export async function getMovieById(id: string) {
-  const movie = await
-    fetch(`${apihttp}/movie/${id}?api_key=${process.env.THEMOVIESDB_API_KEY}&append_to_response=credits,videos&language=en-US`)
-      .then(res => res.json())
-      .then(json => { return json })
+  const apiURL = `${apihttp}/movie/${id}?${apikey}&append_to_response=credits,videos&${language}`;
 
-  return movie
+  const movie = await fetch(apiURL, options).then((res) => {
+    if (res.status === 200) return res.json();
+    else
+      return NextResponse.json({ error: "there was an error fetching data" });
+  });
+
+  return movie;
 }
 
 export async function getTvSeriesById(id: string) {
-  const tv = await
-    fetch(`${apihttp}/tv/${id}?api_key=${process.env.THEMOVIESDB_API_KEY}&append_to_response=credits,videos&language=en-US`)
-      .then(res => res.json())
-      .then(json => { return json })
+  const apiURL = `${apihttp}/tv/${id}?${apikey}&append_to_response=credits,videos&${language}`;
 
-  // console.log(tv)
-  return tv
+  const tv = await fetch(apiURL, options).then((res) => {
+    if (res.status === 200) return res.json();
+    else
+      return NextResponse.json({ error: "there was an error fetching data" });
+  });
+
+  return tv;
 }
 
-export async function searchMovie(search: any) {
+export async function searchMovie(search: string | null) {
+  const apiURL = `${apihttp}/search/multi?query=${search}&${apikey}&${language}`;
 
-  const apiURL = `${apihttp}/search/multi?query=${search}&api_key=${process.env.THEMOVIESDB_API_KEY}&language=en-US`
+  const movie = await fetch(apiURL, options).then((res) => {
+    if (res.status === 200) return res.json();
+    else
+      return NextResponse.json({ error: "there was an error fetching data" });
+  });
 
-  const movie = await
-    fetch(apiURL)
-      .then(res => res.json())
-      .then(json => { return json.results })
+  if (movie.results) return movie.results;
+
+  return movie;
+}
+
+export async function getMovies(
+  type: string | null,
+  query: string,
+  page: number
+) {
+  const apiURL = `${apihttp}/${type}/${query}?&api_key=${process.env.THEMOVIESDB_API_KEY}&page=${page}&${language}`;
+
+  const movie = await fetch(apiURL, options).then((res) => {
+    if (res.status === 200) return res.json();
+    else
+      return NextResponse.json({ error: "there was an error fetching data" });
+  });
+
+  return movie;
+}
+
+export async function getGenres(type: string) {
+  const apiURL = `https://api.themoviedb.org/3/genre/${type}/list?&api_key=${process.env.THEMOVIESDB_API_KEY}`;
+
+  const genre = await fetch(apiURL, options)
+    .then((res) => res.json())
+    .then((json) => {
+      return json.genres;
+    });
+
+  return genre;
+}
+
+export async function getByGenre(
+  type: string | null,
+  genre: string | null,
+  page: number
+) {
+  const apiURL = `${apihttp}/discover/${type}?${apikey}&with_genres=${genre}&page=${page}&${language}`;
+  const movie = await fetch(apiURL, options).then((res) => {
+    if (res.status === 200) return res.json();
+    else
+      return NextResponse.json({ error: "there was an error fetching data" });
+  });
+
+  return movie;
+}
+
+export async function getSimilar(type: string, id: string, page: number) {
+  const apiURL = `${apihttp}/${type}/${id}/similar?&${apikey}&page=${page}&${language}`;
+
+  const similar = await fetch(apiURL, options).then((res) => {
+    if (res.status === 200) return res.json();
+    else
+      return NextResponse.json({ error: "there was an error fetching data" });
+  });
 
   // console.log(movie)
-  return movie
-}
-
-export async function getMovies(type: any, query: any, page: number) {
-
-  const movie = await
-    fetch(`${apihttp}/${type}/${query}?&api_key=${process.env.THEMOVIESDB_API_KEY}&page=${page}&language=en-US`)
-      .then(res => res.json())
-      .then(json => { return json })
-  return movie
-
-}
-
-export async function getGenres(type: any) {
-  const genre = await
-    fetch(`https://api.themoviedb.org/3/genre/${type}/list?&api_key=${process.env.THEMOVIESDB_API_KEY}`)
-      .then(res => res.json())
-      .then(json => { return json.genres })
-
-  return genre
-}
-
-export async function getByGenre(type: any, genre: any, page: number) {
-  const movie = await
-    fetch(`${apihttp}/discover/${type}?api_key=${process.env.THEMOVIESDB_API_KEY}&with_genres=${genre}&page=${page}&language=en-US`, {
-      method: 'GET',
-    })
-      .then(res => res.json())
-      .then(json => { return json })
-
-  // console.log(movie)
-  return movie
-}
-
-export async function getSimilar(type: any, id: any, page: number) {
-
-  const movie = await
-    fetch(`${apihttp}/${type}/${id}/similar?&api_key=${process.env.THEMOVIESDB_API_KEY}&page=${page}&language=en-US`)
-      .then(res => res.json())
-      .then(json => { return json })
-
-  // console.log(movie)
-  return movie
-
+  return similar;
 }

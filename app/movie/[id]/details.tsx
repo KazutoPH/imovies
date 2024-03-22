@@ -1,12 +1,10 @@
-import MovieDetails from '@/components/moviedetails/moviedetails'
-import { getMovieById } from '@/lib/actions/movies.action'
-import React from 'react'
+import MovieDetails from "@/components/moviedetails/moviedetails";
+import { getMovieById } from "@/lib/actions/movies.action";
+import React from "react";
 
-async function Details(id:any) {
-  const movie = await getMovieById(id.id)
-  return (
-    <MovieDetails movie={movie}/>
-  )
+async function Details({ id }: { id: string }) {
+  const movie = await getMovieById(id);
+  return <MovieDetails movie={movie} />;
 }
 
-export default Details
+export default Details;

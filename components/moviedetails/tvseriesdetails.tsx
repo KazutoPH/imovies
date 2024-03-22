@@ -1,34 +1,39 @@
-import Image from 'next/image'
-import Link from 'next/link'
-import React from 'react'
-import { FaStar } from 'react-icons/fa6'
+import {
+  castType,
+  genreType,
+  movieDetailsType,
+  videoResultsType,
+} from "@/types";
+import Image from "next/image";
+import Link from "next/link";
+import React from "react";
+import { FaStar } from "react-icons/fa6";
 
-function TVSeriesDetails({ movie }: any) {
+function TVSeriesDetails({ movie }: { movie: movieDetailsType }) {
   return (
-    <div className='flex w-full flex-col items-center pb-10'>
-      <div className=' w-full flex flex-col'>
-        <div className='relative flex h-[600px] min-w-full w-full items-end transition-transform ease-out duration-1000 self-center z-10 bg-[#3b3b3b]'>
-
-          <div className={`absolute h-full w-full z-10`} >
-            <div className='relative z-20 h-full w-full '>
-              <div className='carouselgradient z-20' />
-              {movie.backdrop_path &&
+    <div className="flex w-full flex-col items-center pb-10">
+      <div className=" w-full flex flex-col">
+        <div className="relative flex h-[600px] min-w-full w-full items-end transition-transform ease-out duration-1000 self-center z-10 bg-[#3b3b3b]">
+          <div className={`absolute h-full w-full z-10`}>
+            <div className="relative z-20 h-full w-full ">
+              <div className="carouselgradient z-20" />
+              {movie.backdrop_path && (
                 <Image
                   src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
                   alt={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
                   fill
                   unoptimized
                   priority
-                  className='object-cover relative -z-10'
+                  className="object-cover relative -z-10"
                 />
-              }
+              )}
             </div>
           </div>
         </div>
 
-        <div className='flex flex-col z-20 -mt-[500px] px-10 gap-10 self-center content-container'>
-          <div className='flex gap-5 flex-col sm:flex-row'>
-          <div className='group flex self-center md:self-start items-center justify-center relative h-full aspect-[24/36] w-[300px] overflow-hidden  rounded-md border-[2px] bg-[#3b3b3b]  border-gray-800 postershadow'>
+        <div className="flex flex-col z-20 -mt-[500px] px-10 gap-10 self-center content-container">
+          <div className="flex gap-5 flex-col sm:flex-row">
+            <div className="group flex self-center md:self-start items-center justify-center relative h-full aspect-[24/36] w-[300px] overflow-hidden  rounded-md border-[2px] bg-[#3b3b3b]  border-gray-800 postershadow">
               {movie.poster_path ? (
                 <div className=" h-full w-full flex justify-center items-center">
                   <Image
@@ -36,97 +41,134 @@ function TVSeriesDetails({ movie }: any) {
                     alt={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
                     fill
                     unoptimized
-                    className='object-cover relative'
+                    className="object-cover relative"
                   />
                 </div>
-              ) :
-                <p className=' text-white text-3xl font-bold text-center'>{movie.name}</p>
-              }
+              ) : (
+                <p className=" text-white text-3xl font-bold text-center">
+                  {movie.name}
+                </p>
+              )}
             </div>
 
-            <div className='flex-col z-20 flex flex-1 gap-5'>
-              <div className='flex flex-col gap-1'>
-                <p className='text-5xl font-extrabold text-white textShadow'>{movie.name}</p>
-                <p className='text-base  text-white textShadow'>{movie.tagline}</p>
-                <div className='flex items-center'>
-                  <p className='text-base  text-white textShadow mr-1'>{Math.round((movie.vote_average) * 10.0) / 10.0}</p>
-                  <FaStar color={'white'} size={20} />
-                  <p className='text-base  text-white textShadow ml-5'>{`(${movie.vote_count}) votes`}</p>
+            <div className="flex-col z-20 flex flex-1 gap-5">
+              <div className="flex flex-col gap-1">
+                <p className="text-5xl font-extrabold text-white textShadow">
+                  {movie.name}
+                </p>
+                <p className="text-base  text-white textShadow">
+                  {movie.tagline}
+                </p>
+                <div className="flex items-center">
+                  <p className="text-base  text-white textShadow mr-1">
+                    {Math.round(movie.vote_average * 10.0) / 10.0}
+                  </p>
+                  <FaStar color={"white"} size={20} />
+                  <p className="text-base  text-white textShadow ml-5">{`(${movie.vote_count}) votes`}</p>
                 </div>
-                <div className='flex flex-row'>
-                  <p className='text-base  text-white textShadow'>{movie.number_of_seasons} Seasons</p>
-                  <p className='text-base text-white textShadow pl-5'>{movie.episode_run_time} mins. episode runtime</p>
+                <div className="flex flex-row">
+                  <p className="text-base  text-white textShadow">
+                    {movie.number_of_seasons} Seasons
+                  </p>
+                  <p className="text-base text-white textShadow pl-5">
+                    {movie.episode_run_time} mins. episode runtime
+                  </p>
                 </div>
 
-                <p className='text-base  text-white textShadow'>First Air Date: {movie.first_air_date}</p>
-                <p className='text-base  text-white textShadow'>{movie.in_production ? 'Ongoing' : 'Completed'}</p>
-
+                <p className="text-base  text-white textShadow">
+                  First Air Date: {movie.first_air_date}
+                </p>
+                <p className="text-base  text-white textShadow">
+                  {movie.in_production ? "Ongoing" : "Completed"}
+                </p>
               </div>
 
-              <div className='flex flex-row gap-3 flex-wrap'>
-
-                {movie.genres?.map((genre: any, i: any) =>
-                  <Link href={`/list?type=tv&genre=${genre.name}&genreID=${genre.id}`} key={i}>
-                    <div className='py-1 px-4 border-2 border-white rounded-full hover:bg-yellow-400 hover:text-dark hover:scale-110 active:scale-100 transition' key={i}>
-                      <p className='text-base textShadow  text-white'>{genre.name}</p>
+              <div className="flex flex-row gap-3 flex-wrap">
+                {movie.genres?.map((genre: genreType, i: number) => (
+                  <Link
+                    href={`/list?type=tv&genre=${genre.name}&genreID=${genre.id}`}
+                    key={i}
+                  >
+                    <div
+                      className="py-1 px-4 border-2 border-white rounded-full hover:bg-yellow-400 hover:text-dark hover:scale-110 active:scale-100 transition"
+                      key={i}
+                    >
+                      <p className="text-base textShadow  text-white">
+                        {genre.name}
+                      </p>
                     </div>
                   </Link>
-                )}
-
+                ))}
               </div>
-              <div className='flex flex-col gap-1'>
-                <p className='text-2xl text-white textShadow font-bold'>Synopsis</p>
-                <p className='text-base  text-white textShadow'>{movie.overview}</p>
+              <div className="flex flex-col gap-1">
+                <p className="text-2xl text-white textShadow font-bold">
+                  Synopsis
+                </p>
+                <p className="text-base  text-white textShadow">
+                  {movie.overview}
+                </p>
               </div>
 
-              <div className='flex flex-col gap-1'>
-                <p className='text-2xl text-white textShadow font-bold'>Cast</p>
-                <div className='flex flex-row gap-5 flex-wrap'>
-                  {movie.credits?.cast?.slice(0, 5).map((cast: any, i: any) =>
-                    <div className=' flex-wrap max-w-min' key={i}>
-                      <div className=' h-[160px] w-[130px] relative bg-white overflow-hidden'>
-                        {cast.profile_path ? (
-                        <Image
-                        src={`https://image.tmdb.org/t/p/original${cast.profile_path}`}
-                        alt={`https://image.tmdb.org/t/p/original${cast.profile_path}`}
-                        fill
-                        unoptimized
-                        className='object-cover relative'
-                      />
-                        ): (
-                          <Image
-                          src={'/assets/avatar.png'}
-                          alt={'avatar'}
-                          fill
-                          unoptimized
-                          className='object-cover mt-5'
-                        />
-                        )}
+              <div className="flex flex-col gap-1">
+                <p className="text-2xl text-white textShadow font-bold">Cast</p>
+                <div className="flex flex-row gap-5 flex-wrap">
+                  {movie.credits?.cast
+                    ?.slice(0, 5)
+                    .map((cast: castType, i: number) => (
+                      <div className=" flex-wrap max-w-min" key={i}>
+                        <div className=" h-[160px] w-[130px] relative bg-white overflow-hidden">
+                          {cast.profile_path ? (
+                            <Image
+                              src={`https://image.tmdb.org/t/p/original${cast.profile_path}`}
+                              alt={`https://image.tmdb.org/t/p/original${cast.profile_path}`}
+                              fill
+                              unoptimized
+                              className="object-cover relative"
+                            />
+                          ) : (
+                            <Image
+                              src={"/assets/avatar.png"}
+                              alt={"avatar"}
+                              fill
+                              unoptimized
+                              className="object-cover mt-5"
+                            />
+                          )}
+                        </div>
+
+                        <p className="text-base  text-white textShadow mt-1">
+                          {cast.name}
+                        </p>
                       </div>
-
-                      <p className='text-base  text-white textShadow mt-1'>{cast.name}</p>
-                    </div>
-                  )}
+                    ))}
                 </div>
               </div>
-
             </div>
           </div>
 
-          {movie.videos.results.slice(-4).reverse().map((data: any, i: any) =>
-            <div className=' w-full' key={i}>
-              <p className='text-2xl text-white textShadow font-bold pb-2'>{data.name}</p>
-              <div className=' h-auto w-full'>
-                <iframe className='w-full aspect-video max-h-[600px] min-h-[300px]' src={`https://www.youtube.com/embed/${data.key}`} title="Movie Trailer" allow="autoplay; picture-in-picture;" allowFullScreen></iframe>
+          {movie.videos.results
+            .slice(-4)
+            .reverse()
+            .map((data: videoResultsType, i: number) => (
+              <div className=" w-full" key={i}>
+                <p className="text-2xl text-white textShadow font-bold pb-2">
+                  {data.name}
+                </p>
+                <div className=" h-auto w-full">
+                  <iframe
+                    className="w-full aspect-video max-h-[600px] min-h-[300px]"
+                    src={`https://www.youtube.com/embed/${data.key}`}
+                    title="Movie Trailer"
+                    allow="autoplay; picture-in-picture;"
+                    allowFullScreen
+                  ></iframe>
+                </div>
               </div>
-            </div>
-          )}
+            ))}
         </div>
-
-
       </div>
     </div>
-  )
+  );
 }
 
-export default TVSeriesDetails
+export default TVSeriesDetails;

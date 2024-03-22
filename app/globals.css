@@ -2,87 +2,88 @@
 @tailwind components;
 @tailwind utilities;
 
-
-html, body {
-  @apply scroll-smooth w-auto overflow-x-hidden
+html,
+body {
+  @apply scroll-smooth w-auto overflow-x-hidden;
 }
 
-  .content-container {
-    @apply max-w-7xl w-full px-[5%] md:px-5 scroll-mt-10 sm:scroll-mt-40
-    
-  }
+body {
+  @apply md:overflow-auto;
+}
 
-  .boxshadow {
-    box-shadow: inset 0 0 10px 10px rgba(246, 218, 33, 1)
-    
-  }
+.content-container {
+  @apply max-w-7xl w-full px-[5%] md:px-5 scroll-mt-10 sm:scroll-mt-40;
+}
 
-  .textShadow {
-    color: white;
-    text-shadow: 2px 4px 4px rgba(18,18,18,1);
-  }
+.boxshadow {
+  box-shadow: inset 0 0 10px 10px rgba(246, 218, 33, 1);
+}
 
-  .postershadow {
-    box-shadow: rgba(18, 18, 18) 0px 30px 40px 20px;
-  }
+.textShadow {
+  color: white;
+  text-shadow: 2px 4px 4px rgba(18, 18, 18, 1);
+}
 
+.postershadow {
+  box-shadow: rgba(18, 18, 18) 0px 30px 40px 20px;
+}
+
+.gridcontainer {
+  display: grid;
+  grid-auto-flow: dense;
+  gap: 5px;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+}
+
+@media only screen and (max-width: 640px) {
   .gridcontainer {
     display: grid;
     grid-auto-flow: dense;
     gap: 5px;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
   }
+}
 
-  @media only screen and (max-width: 640px) {
-    .gridcontainer {
-      display: grid;
-      grid-auto-flow: dense;
-      gap: 5px;
-      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-    }
-  }
+.gridNav {
+  display: grid;
+  grid-auto-flow: dense;
+  gap: 5px;
+  grid-template-columns: repeat(auto-fill, minmax(auto-fill, 1fr));
+}
 
-  .gridNav {
-    display: grid;
-    grid-auto-flow: dense;
-    gap: 5px;
-    grid-template-columns: repeat(auto-fill, minmax(auto-fill, 1fr));
-  }
+.carouselgradient {
+  @apply absolute top-0 left-0  w-full h-full bg-gradient-to-t from-dark/100 to-dark/20;
+}
 
-  .carouselgradient {
-    @apply absolute top-0 left-0  w-full h-full bg-gradient-to-t from-dark/100 to-dark/20
-  }
+.btn {
+  @apply bg-yellow-400 py-2 px-5 rounded-full text-dark font-semibold text-lg;
+}
 
-  .btn { 
-    @apply bg-yellow-400 py-2 px-5 rounded-full text-dark font-semibold text-lg
-  }
+.btn2 {
+  @apply py-1 px-2 rounded-full text-white font-semibold text-lg box-border border-white border-[3px];
+}
 
-  .btn2 { 
-    @apply py-1 px-2 rounded-full text-white font-semibold text-lg box-border border-white border-[3px]
-  }
+.btn2:hover {
+}
 
-  .btn2:hover {
-
-  }
-
-  .no-scrollbar::-webkit-scrollbar {
-    display: none;
-  }
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
 
 .no-scrollbar {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
-  }
+}
 
-  .darkbg {
-    @apply bg-dark/80 fixed h-full w-full z-[9999] top-0 bottom-0 left-0 right-0 items-center justify-center
-  }
+.darkbg {
+  @apply bg-dark/80 fixed h-full w-full z-[9999] top-0 bottom-0 left-0 right-0 items-center justify-center;
+}
 
-  .sidenav {
-    @apply fixed h-full w-full z-50 top-0 items-center justify-center
-  }
+.sidenav {
+  @apply fixed h-full w-full z-50 top-0 items-center justify-center;
+}
 
-  /* .carouselImgContainer::before {
+/* .carouselImgContainer::before {
     content: '';
     @apply absolute top-0 left-0  w-full h-full bg-gradient-to-t from-dark/100 to-dark/5
     
@@ -94,16 +95,18 @@ html, body {
   aspect-ratio: 1;
   border-radius: 50%;
   background: #facc15;
-  --_m: 
-    conic-gradient(#0000 10%,#000),
-    linear-gradient(#000 0 0) content-box;
+  --_m: conic-gradient(#0000 10%, #000), linear-gradient(#000 0 0) content-box;
   -webkit-mask: var(--_m);
-          mask: var(--_m);
+  mask: var(--_m);
   -webkit-mask-composite: source-out;
-          mask-composite: subtract;
+  mask-composite: subtract;
   animation: l3 1s infinite linear;
 }
-@keyframes l3 {to{transform: rotate(1turn)}}
+@keyframes l3 {
+  to {
+    transform: rotate(1turn);
+  }
+}
 
 /* HTML: <div class="loader"></div> */
 /* HTML: <div class="loader"></div> */
