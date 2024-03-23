@@ -7,10 +7,6 @@ body {
   @apply scroll-smooth w-auto overflow-x-hidden;
 }
 
-body {
-  @apply md:overflow-auto;
-}
-
 .content-container {
   @apply max-w-7xl w-full px-[5%] md:px-5 scroll-mt-10 sm:scroll-mt-40;
 }
