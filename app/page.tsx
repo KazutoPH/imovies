@@ -17,14 +17,14 @@ export default function Home() {
       </Suspense>
 
       <div className='flex flex-col gap-5 w-full max-w-7xl'>
-      {homeCarouselList.map((data, i) =>
+        {homeCarouselList.map((data, i) =>
           <div className='flex flex-col' key={i}>
-          <Suspense fallback={<MovieCarouselSkeleton/>}>
-            <CarouselListRender name={data.name} type={data.type} query={data.query} page={1} />
-          </Suspense>
+            <Suspense fallback={<MovieCarouselSkeleton />}>
+              <CarouselListRender name={data.name} type={data.type} query={data.query} page={1} />
+            </Suspense>
           </div>
-      )}
-       </div>
+        )}
+      </div>
     </main>
   )
 }

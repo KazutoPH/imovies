@@ -16,7 +16,7 @@ function MovieDetails({ movie }: { movie: movieDetailsType }) {
         <div className="relative flex h-[600px] min-w-full w-full items-end self-center z-10 bg-white">
           <div className={`absolute h-full w-full z-10 `}>
             <div className="relative z-20 h-full w-full ">
-              <div className="carouselgradient z-20" />
+              <div className="carouselgradient z-20 relative" />
               {movie.backdrop_path && (
                 <Image
                   src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}

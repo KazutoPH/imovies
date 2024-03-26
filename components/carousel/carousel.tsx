@@ -168,13 +168,13 @@ function Carousel({ trending }: { trending: movieDetailsType[] }) {
                   </div>
 
                   <motion.div
-                    initial={{ opacity: 0, scale: 0 }}
-                    transition={{
-                      duration: 0.2,
-                      type: "spring",
-                      stiffness: 100,
-                    }}
-                    whileInView={{ opacity: 1, scale: 1 }}
+                    // initial={{ opacity: 0, scale: 0 }}
+                    // transition={{
+                    //   duration: 0.2,
+                    //   type: "spring",
+                    //   stiffness: 100,
+                    // }}
+                    // whileInView={{ opacity: 1, scale: 1 }}
                     className="md:flex relative min-h-[420px] w-[330px] overflow-hidden  rounded-md border-[2px]  border-gray-800 hidden"
                   >
                     <Image
@@ -194,9 +194,8 @@ function Carousel({ trending }: { trending: movieDetailsType[] }) {
             trending.map((movie, i) => (
               <div
                 onClick={() => setCurrentSlide(i)}
-                className={`h-2 w-2 rounded-full ${
-                  currentSlide === i ? " bg-white" : " bg-gray-500"
-                } hover:cursor-pointer`}
+                className={`h-2 w-2 rounded-full ${currentSlide === i ? " bg-white" : " bg-gray-500"
+                  } hover:cursor-pointer`}
                 key={i}
               />
             ))}
