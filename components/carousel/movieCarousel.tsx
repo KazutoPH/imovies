@@ -5,19 +5,17 @@ import { FaChevronLeft, FaChevronRight, FaStar } from 'react-icons/fa6';
 import { useEffect, useRef, useState } from "react";
 import MovieCard from "../card/movieCard";
 
-let currentSlide = 0
-
 function MovieCarousel({ movies, title, type }: any) {
   const controls = useDragControls()
   const [isDragging, setIsDragging] = useState(false)
   const [isClick, setIsCLick] = useState(false)
   const [containerWidth, setContainerWidth] = useState(0);
-  const [showLeftButton, setShowLeftButton] = useState(true)
+  const [showLeftButton, setShowLeftButton] = useState(false)
   const [showRightButton, setShowRightButton] = useState(true)
   const ref = useRef<HTMLDivElement>(null)
   const dragControls = useDragControls();
   const animationControls = useAnimationControls();
-  let currentSlide = 0
+  let currentSlide = useRef(0)
 
 
   useEffect(() => {
@@ -51,14 +49,14 @@ function MovieCarousel({ movies, title, type }: any) {
     let total
     // console.log('left CurrentSlide', currentSlide)
     if (ref.current) {
-      total = ref.current.offsetWidth + currentSlide
+      total = ref.current.offsetWidth + currentSlide.current
 
       if (total < 0) {
         animationControls.start({
           x: total,
           y: 0
         })
-        currentSlide = total
+        currentSlide.current = total
       } else {
         animationControls.start({ x: 0 })
       }
@@ -73,17 +71,17 @@ function MovieCarousel({ movies, title, type }: any) {
     let total
 
     if (ref.current) {
-      total = currentSlide - ref.current.offsetWidth
+      total = currentSlide.current - ref.current.offsetWidth
 
       if (total > -containerWidth) {
         animationControls.start({
           x: total,
           y: 0
         })
-        currentSlide = total
+        currentSlide.current = total
       } else {
         animationControls.start({ x: -containerWidth })
-        currentSlide = -containerWidth
+        currentSlide.current = -containerWidth
       }
     }
     setIsCLick(true)
@@ -91,21 +89,22 @@ function MovieCarousel({ movies, title, type }: any) {
 
   const DRAGGING = (e: any) => {
 
-    // if (e.x < 0) {
-    //   setShowLeftButton(true)
-    // } else {
-    //   setShowLeftButton(false)
-    // }
+    if (e.x < 0) {
+      setShowLeftButton(true)
+    } else {
+      setShowLeftButton(false)
+    }
 
-    // if (ref.current)
-    //   if (e.x > -containerWidth) {
-    //     setShowRightButton(true)
+    if (ref.current)
+      if (e.x > -containerWidth) {
+        setShowRightButton(true)
 
-    //   } else {
-    //     setShowRightButton(false)
-    //   }
+      } else {
+        setShowRightButton(false)
+      }
 
-    currentSlide = e.x
+    if (!isClick)
+      currentSlide.current = e.x
 
     // console.log("Drag", e.x)
   }
