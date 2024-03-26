@@ -103,8 +103,7 @@ function MovieCarousel({ movies, title, type }: any) {
         setShowRightButton(false)
       }
 
-    if (!isClick)
-      currentSlide.current = e.x
+    currentSlide.current = e.x
 
     // console.log("Drag", e.x)
   }
